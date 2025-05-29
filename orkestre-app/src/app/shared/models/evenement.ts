@@ -9,4 +9,5 @@ export interface Evenement {
   category: EvenementCategory;
   maxCapacity: number;
   organizerId: number;
+  price:number;
 }
