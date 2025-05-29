@@ -1,0 +1,9 @@
+.card-img-top{
+    height: 225px; 
+    background: linear-gradient(135deg, #8b5fbf, #5f9fd8, #d19a66);
+}
+
+.btn-sign-in {
+    background: linear-gradient(135deg, #8b5fbf, #5f9fd8, #d19a66); 
+    border: none;
+}
