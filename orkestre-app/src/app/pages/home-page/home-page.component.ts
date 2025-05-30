@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CardEvenementComponent } from "../card-evenement/card-evenement.component";
+import { OrkestrePresentationComponent } from "../orkestre-presentation/orkestre-presentation.component";
 
 @Component({
   selector: 'app-home-page',
-  imports: [CardEvenementComponent],
+  imports: [OrkestrePresentationComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
