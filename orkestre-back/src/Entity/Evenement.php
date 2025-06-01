@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
@@ -22,7 +20,7 @@ class Evenement
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTime $evenementDate = null;
+    private ?\DateTimeInterface $evenementDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;
@@ -33,16 +31,11 @@ class Evenement
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'evenements')]
-    private Collection $organizerId;
+    #[ORM\Column(type: 'string', enumType: EvenementCategoryEnum::class)]
+    private ?EvenementCategoryEnum $category = null;
 
-    public function __construct()
-    {
-        $this->organizerId = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'evenement')]
+    private ?User $organizerId = null;
 
     public function getId(): ?int
     {
@@ -121,26 +114,34 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getOrganizerId(): Collection
+    public function getCategory(): ?EvenementCategoryEnum
     {
-        return $this->organizerId;
+        return $this->category;
     }
 
-    public function addOrganizerId(User $organizerId): static
+    public function setCategory(?EvenementCategoryEnum $category): static
     {
-        if (!$this->organizerId->contains($organizerId)) {
-            $this->organizerId->add($organizerId);
-        }
+        $this->category = $category;
 
         return $this;
     }
 
-    public function removeOrganizerId(User $organizerId): static
+    /**
+     * Get the value of organizerId
+     */ 
+    public function getOrganizerId()
     {
-        $this->organizerId->removeElement($organizerId);
+        return $this->organizerId;
+    }
+
+    /**
+     * Set the value of organizerId
+     *
+     * @return  self
+     */ 
+    public function setOrganizerId($organizerId)
+    {
+        $this->organizerId = $organizerId;
 
         return $this;
     }

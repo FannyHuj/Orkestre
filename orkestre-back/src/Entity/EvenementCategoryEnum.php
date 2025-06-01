@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-enum EvenementCategory: string {
+enum EvenementCategoryEnum: string {
 
     case CONCERT = 'concert';
     case CONFERENCE = 'conference';

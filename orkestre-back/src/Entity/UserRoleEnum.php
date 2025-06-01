@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-enum UserRole: string {
+enum UserRoleEnum: string {
 
     case USER = 'user';
     case ORGANIZER = 'organizer';

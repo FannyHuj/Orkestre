@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -28,16 +26,16 @@ class User
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    /**
-     * @var Collection<int, Evenement>
-     */
-    #[ORM\ManyToMany(targetEntity: Evenement::class, mappedBy: 'organizerId')]
-    private Collection $evenements;
 
-    public function __construct()
-    {
-        $this->evenements = new ArrayCollection();
-    }
+    #[ORM\Column(type: 'string', enumType: UserRoleEnum::class)]
+    private ?UserRoleEnum $role = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $password = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $phoneNumber = null;
+
 
     public function getId(): ?int
     {
@@ -92,29 +90,38 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection<int, Evenement>
-     */
-    public function getEvenements(): Collection
+    public function getRole(): ?UserRoleEnum
     {
-        return $this->evenements;
+        return $this->role;
     }
 
-    public function addEvenement(Evenement $evenement): static
+    public function setRole(?UserRoleEnum $role): static
     {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements->add($evenement);
-            $evenement->addOrganizerId($this);
-        }
+        $this->role = $role;
 
         return $this;
     }
 
-    public function removeEvenement(Evenement $evenement): static
+    public function getPassword(): ?string
     {
-        if ($this->evenements->removeElement($evenement)) {
-            $evenement->removeOrganizerId($this);
-        }
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?int
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?int $phoneNumber): static
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
