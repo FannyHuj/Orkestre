@@ -1,0 +1,116 @@
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 py-5">
+    <div class="card shadow-lg border-0 rounded-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body p-5">
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <h1 class="h3 mb-4">Créer un compte</h1>
+                <p class="text-muted small">Rejoignez Orkestre pour organiser et participer à des événements
+                    exceptionnels</p>
+            </div>
+
+            <form>
+                <!-- Infos -->
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-person-circle text-muted me-2"></i>
+                        <h6 class="text-dark mb-0 fw-semibold">Informations personnelles</h6>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="prenom" class="form-label text-dark fw-medium">
+                                Prénom <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control border-2 rounded-3 py-2" id="prenom" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nom" class="form-label text-dark fw-medium">
+                                Nom <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control border-2 rounded-3 py-2" id="nom" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-envelope text-muted me-2"></i> 
+                        <h6 class="text-dark mb-0 fw-semibold">Informations de contact</h6>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label text-dark fw-medium">
+                            Email <span class="text-danger">*</span>
+                        </label>
+                        <input type="email" class="form-control border-2 rounded-3 py-2" id="email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="telephone" class="form-label text-dark fw-medium">
+                            Téléphone <span class="text-danger">*</span>
+                        </label>
+                        <input type="tel" class="form-control border-2 rounded-3 py-2" id="telephone" required>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-lock text-muted me-2"></i>
+                        <h6 class="text-dark mb-0 fw-semibold">Mot de passe</h6>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="motdepasse" class="form-label text-dark fw-medium">
+                            Mot de passe <span class="text-danger">*</span>
+                        </label>
+                        <input type="password" class="form-control border-2 rounded-3 py-2" id="motdepasse" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmer" class="form-label text-dark fw-medium">
+                            Confirmer le mot de passe <span class="text-danger">*</span>
+                        </label>
+                        <input type="password" class="form-control border-2 rounded-3 py-2" id="confirmer" required>
+                    </div>
+                </div>
+
+                <!-- Adress -->
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-geo-alt text-muted me-2"></i>
+                        <h6 class="text-dark mb-0 fw-semibold">Adresse</h6>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="adresse" class="form-label text-dark fw-medium">
+                            Adresse <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control border-2 rounded-3 py-2" id="adresse" required>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="ville" class="form-label text-dark fw-medium">
+                                Ville <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control border-2 rounded-3 py-2" id="ville" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="codepostal" class="form-label text-dark fw-medium">
+                                Code postal <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control border-2 rounded-3 py-2" id="codepostal" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="d-grid mt-4">
+                  <button class="btn btn-primary btn-create w-100 text-white" type="submit">Créer mon compte</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

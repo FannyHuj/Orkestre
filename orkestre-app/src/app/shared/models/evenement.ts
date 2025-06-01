@@ -4,7 +4,7 @@ export interface Evenement {
   id: number;
   title: string;
   description: string;
-  eventDate: Date;
+  evenementDate: Date;
   location: string;
   category: EvenementCategory;
   maxCapacity: number;
