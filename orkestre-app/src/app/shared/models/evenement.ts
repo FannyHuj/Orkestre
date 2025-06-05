@@ -1,4 +1,4 @@
-import { EvenementCategory } from "./evenementCategory";
+import { EvenementCategoryEnum } from "./evenementCategoryEnum";
 
 export interface Evenement {
   id: number;
@@ -6,7 +6,7 @@ export interface Evenement {
   description: string;
   evenementDate: Date;
   location: string;
-  category: EvenementCategory;
+  category: EvenementCategoryEnum;
   maxCapacity: number;
   organizerId: number;
   price:number;

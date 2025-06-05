@@ -1,6 +1,7 @@
 <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 py-5">
     <div class="card shadow-lg border-0 rounded-4" style="max-width: 500px; width: 100%;">
         <div class="card-body p-5">
+
             <!-- Header -->
             <div class="text-center mb-4">
                 <h1 class="h3 mb-4">Créer un compte</h1>
@@ -8,7 +9,15 @@
                     exceptionnels</p>
             </div>
 
-            <form>
+            <!-- Alerts -->
+            <div *ngIf="successMessage" class="alert alert-success" role="alert">
+                {{ successMessage }}
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                {{ errorMessage }}
+            </div>
+
+            <form #f="ngForm" (ngSubmit)="signIn($event)" enctype="multipart/form-data">
                 <!-- Infos -->
                 <div class="mb-4">
                     <div class="d-flex align-items-center mb-3">
@@ -18,16 +27,34 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="prenom" class="form-label text-dark fw-medium">
+                            <label for="firstName" class="form-label text-dark fw-medium">
                                 Prénom <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control border-2 rounded-3 py-2" id="prenom" required>
+                            <input type="text" class="form-control border-2 rounded-3 py-2"
+                                placeholder="Saisissez votre prénom" [(ngModel)]="user.firstName" name="firstName"
+                                required #firstNameRef="ngModel" id="firstName" required>
+                            <div *ngIf="firstNameRef.invalid && firstNameRef.touched" class="text-danger">
+                                Prénom requis.
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="nom" class="form-label text-dark fw-medium">
+                            <label for="lastName" class="form-label text-dark fw-medium">
                                 Nom <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control border-2 rounded-3 py-2" id="nom" required>
+                            <input type="text" class="form-control border-2 rounded-3 py-2"
+                                placeholder="Saisissez votre nom" [(ngModel)]="user.lastName" name="lastName" required
+                                #lastNameRef="ngModel" id="lastName" required id="lastName" required>
+                            <div *ngIf="firstNameRef.invalid && lastNameRef.touched" class="text-danger">
+                                Nom requis.
+                            </div>
+                        </div>
+                        <!-- Picture -->
+                        <div class="mb-3">
+                            <label for="picture" class="form-label text-dark fw-medium">
+                                Photo de profil <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" class="form-control border-2 rounded-3 py-2"
+                                (change)="onFileSelected($event)" required id="picture">
                         </div>
                     </div>
                 </div>
@@ -35,7 +62,7 @@
                 <!-- Contact -->
                 <div class="mb-4">
                     <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-envelope text-muted me-2"></i> 
+                        <i class="bi bi-envelope text-muted me-2"></i>
                         <h6 class="text-dark mb-0 fw-semibold">Informations de contact</h6>
                     </div>
 
@@ -43,14 +70,20 @@
                         <label for="email" class="form-label text-dark fw-medium">
                             Email <span class="text-danger">*</span>
                         </label>
-                        <input type="email" class="form-control border-2 rounded-3 py-2" id="email" required>
+                        <input type="email" class="form-control border-2 rounded-3 py-2" [(ngModel)]="user.email"
+                            name="email" required #emailRef="ngModel" id="email" required>
+
+                        <div *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">
+                            Email requis.
+                        </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="telephone" class="form-label text-dark fw-medium">
+                        <label for="phoneNumber" class="form-label text-dark fw-medium">
                             Téléphone <span class="text-danger">*</span>
                         </label>
-                        <input type="tel" class="form-control border-2 rounded-3 py-2" id="telephone" required>
+                        <input type="text" [(ngModel)]="user.phoneNumber" class="form-control border-2 rounded-3 py-2"
+                            id="phoneNumber" required>
                     </div>
                 </div>
 
@@ -62,53 +95,22 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="motdepasse" class="form-label text-dark fw-medium">
+                        <label for="password" class="form-label text-dark fw-medium">
                             Mot de passe <span class="text-danger">*</span>
                         </label>
-                        <input type="password" class="form-control border-2 rounded-3 py-2" id="motdepasse" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="confirmer" class="form-label text-dark fw-medium">
-                            Confirmer le mot de passe <span class="text-danger">*</span>
-                        </label>
-                        <input type="password" class="form-control border-2 rounded-3 py-2" id="confirmer" required>
-                    </div>
-                </div>
-
-                <!-- Adress -->
-                <div class="mb-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-geo-alt text-muted me-2"></i>
-                        <h6 class="text-dark mb-0 fw-semibold">Adresse</h6>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="adresse" class="form-label text-dark fw-medium">
-                            Adresse <span class="text-danger">*</span>
-                        </label>
-                        <input type="text" class="form-control border-2 rounded-3 py-2" id="adresse" required>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label for="ville" class="form-label text-dark fw-medium">
-                                Ville <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" class="form-control border-2 rounded-3 py-2" id="ville" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="codepostal" class="form-label text-dark fw-medium">
-                                Code postal <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" class="form-control border-2 rounded-3 py-2" id="codepostal" required>
+                        <input type="password" [(ngModel)]="user.password" class="form-control border-2 rounded-3 py-2"
+                            id="password" required required minlength="8" #passwordRef="ngModel">
+                        <div *ngIf="passwordRef.invalid && passwordRef.touched" class="text-danger">
+                            Mot de passe requis
                         </div>
                     </div>
+
                 </div>
 
                 <!-- Button -->
                 <div class="d-grid mt-4">
-                  <button class="btn btn-primary btn-create w-100 text-white" type="submit">Créer mon compte</button>
+                    <button type="submit" class="btn btn-primary btn-create w-100 text-white"
+                        [disabled]="f.invalid">Créer mon compte</button>
                 </div>
             </form>
         </div>

@@ -1,4 +1,4 @@
-export enum EvenementCategory {
+export enum EvenementCategoryEnum {
   CONCERT = 'concert',
   CONFERENCE = 'conference',
   SPORT = 'sport',
