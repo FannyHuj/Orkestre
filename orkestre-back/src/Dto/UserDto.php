@@ -12,7 +12,7 @@ Class UserDto {
     public ?string $picture = null;
     public ?UserRoleEnum $role = null;
     public ?string $password = null;
-    public ?int $phoneNumber = null;
+    public ?string $phoneNumber = null;
 
     /**
      * Get the value of id
