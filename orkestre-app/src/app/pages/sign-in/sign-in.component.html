@@ -51,10 +51,10 @@
                         <!-- Picture -->
                         <div class="mb-3">
                             <label for="picture" class="form-label text-dark fw-medium">
-                                Photo de profil <span class="text-danger">*</span>
+                                Photo de profil
                             </label>
                             <input type="file" class="form-control border-2 rounded-3 py-2"
-                                (change)="onFileSelected($event)" required id="picture">
+                                (change)="onFileSelected($event)" name="picture" required id="picture">
                         </div>
                     </div>
                 </div>
@@ -80,9 +80,9 @@
 
                     <div class="mb-3">
                         <label for="phoneNumber" class="form-label text-dark fw-medium">
-                            Téléphone <span class="text-danger">*</span>
+                            Téléphone
                         </label>
-                        <input type="text" [(ngModel)]="user.phoneNumber" class="form-control border-2 rounded-3 py-2"
+                        <input type="text" [(ngModel)]="user.phoneNumber" name="phoneNumber" class="form-control border-2 rounded-3 py-2"
                             id="phoneNumber" required>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         <label for="password" class="form-label text-dark fw-medium">
                             Mot de passe <span class="text-danger">*</span>
                         </label>
-                        <input type="password" [(ngModel)]="user.password" class="form-control border-2 rounded-3 py-2"
+                        <input type="password" [(ngModel)]="user.password" name="password" class="form-control border-2 rounded-3 py-2"
                             id="password" required required minlength="8" #passwordRef="ngModel">
                         <div *ngIf="passwordRef.invalid && passwordRef.touched" class="text-danger">
                             Mot de passe requis

@@ -28,12 +28,12 @@ export class SignInComponent {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('firstName', this.user.firstName);
-    formData.append('lastName', this.user.lastName);
-    formData.append('email', this.user.email);
-    formData.append('password', this.user.password);
-    formData.append('phone', this.user.phoneNumber);
-    formData.append('picture', this.avatar);
+    formData.append("firstName", this.user.firstName);
+    formData.append("lastName", this.user.lastName);
+    formData.append("email", this.user.email);
+    formData.append("password", this.user.password);
+    formData.append("phoneNumber", this.user.phoneNumber);
+    formData.append("picture", this.avatar);
 
     this.userService.signIn(formData).subscribe({
       next: (response) => {
