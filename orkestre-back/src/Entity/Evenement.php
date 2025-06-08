@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
@@ -19,7 +20,7 @@ class Evenement
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(nullable: true)]
+     #[ORM\Column (type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $evenementDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -66,12 +67,12 @@ class Evenement
         return $this;
     }
 
-    public function getEvenementDate(): ?\DateTime
+    public function getEvenementDate(): ?\DateTimeInterface
     {
         return $this->evenementDate;
     }
 
-    public function setEvenementDate(?\DateTime $evenementDate): static
+    public function setEvenementDate(?\DateTimeInterface $evenementDate): static
     {
         $this->evenementDate = $evenementDate;
 
@@ -126,23 +127,16 @@ class Evenement
         return $this;
     }
 
-    /**
-     * Get the value of organizerId
-     */ 
-    public function getOrganizerId()
+    public function getOrganizerId(): ?User
     {
-        return $this->organizerId;
+    return $this->organizerId;
     }
 
-    /**
-     * Set the value of organizerId
-     *
-     * @return  self
-     */ 
-    public function setOrganizerId($organizerId)
+    public function setOrganizerId(?User $organizerId): static
     {
-        $this->organizerId = $organizerId;
+    $this->organizerId = $organizerId;
 
-        return $this;
+    return $this;
     }
+
 }

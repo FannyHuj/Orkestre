@@ -14,7 +14,7 @@ Class EvenementDto {
     public ?int $maxCapacity = null;
     public ?int $price = null;
     public ?EvenementCategoryEnum $category = null;
-    public ?UserDto $organizerId = null;
+    public ?int $organizerId = null;
 
 
     /**

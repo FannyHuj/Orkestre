@@ -13,7 +13,7 @@ use App\Repository\UserRepository;
 use App\Entity\UserRoleEnum;
 use Psr\Log\LoggerInterface;
 
-final class UserController extends AbstractController
+class UserController extends AbstractController
 {
     #[Route('/api/signIn', methods:['POST'])]
     public function signIn(Request $request, LoggerInterface $logger, UserRepository $userRepository,UserPasswordHasherInterface $passwordHasher): JsonResponse
