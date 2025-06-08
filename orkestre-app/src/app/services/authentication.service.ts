@@ -4,12 +4,15 @@ import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { User } from '../shared/models/user';
+import { Login } from '../shared/models/login';
+import { Auth } from '../shared/models/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   token: string | null = null;
+  private isUserLogged: boolean = false;
 
   constructor(private cookieService: CookieService, private http: HttpClient) {}
 
@@ -30,11 +33,25 @@ export class AuthenticationService {
   }
 
   getUser(): Observable<any> {
-    let user: User = {} as User; // Created a user object
-    let tokenInfo = this.getDecodedAccessToken(this.getToken()); // Get the decoded token information
-    user.email = tokenInfo.username; // The mail attribute of the user object is equal to the mail attribute (username) contained in the token
+    let user: User = {} as User; // Création d'un objet user
+    let tokenInfo = this.getDecodedAccessToken(this.getToken()); // Récupération du Token
+    user.email = tokenInfo.username; // L'attribut mail de l'objet user est égal à l'attribut mail (username) contenu dans le token
     return this.http.get(
-      `http://localhost:8000/api/user/${tokenInfo.username}` // Send the user to PHP
-    );
+      `http://localhost:8000/api/user/${tokenInfo.username}`
+    ); // envoie le user à PHP
+  }
+
+  login(login: Login): Observable<Auth> {
+    this.isUserLogged = true;
+    return this.http.post<Auth>('http://localhost:8000/api/login_check', login);
+  }
+
+  logout() {
+    this.cookieService.delete('jwtToken');
+    this.isUserLogged = false;
+  }
+
+  isUserConnected(): boolean {
+    return this.isUserLogged;
   }
 }
