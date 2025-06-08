@@ -15,7 +15,7 @@ export const routes: Routes = [
     component: CardEvenementComponent,
   },
   {
-    path: 'CreateEvenement',
+    path: 'createEvenement',
     component: EvenementFormComponent,
   },
   {
