@@ -10,7 +10,7 @@ Class UserDto {
     public ?string $lastName = null;
     public ?string $email = null;
     public ?string $picture = null;
-    public ?UserRoleEnum $role = null;
+    public ?UserRoleEnum $roles = null;
     public ?string $password = null;
     public ?string $phoneNumber = null;
 
@@ -117,9 +117,9 @@ Class UserDto {
     /**
      * Get the value of role
      */ 
-    public function getRole()
+    public function getRoles()
     {
-        return $this->role;
+        return $this->roles;
     }
 
     /**
@@ -127,9 +127,9 @@ Class UserDto {
      *
      * @return  self
      */ 
-    public function setRole($role)
+    public function setRoles($roles)
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }

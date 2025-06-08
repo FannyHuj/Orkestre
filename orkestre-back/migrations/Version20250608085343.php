@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250601084026 extends AbstractMigration
+final class Version20250608085343 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,19 +21,16 @@ final class Version20250601084026 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE evenement ADD organizer_id_id INT DEFAULT NULL
-        SQL);
-        $this->addSql(<<<'SQL'
-            ALTER TABLE evenement ADD CONSTRAINT FK_B26681EE78C696A FOREIGN KEY (organizer_id_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE
+            CREATE TABLE evenement (id SERIAL NOT NULL, organizer_id_id INT DEFAULT NULL, title VARCHAR(255) DEFAULT NULL, description VARCHAR(255) DEFAULT NULL, evenement_date VARCHAR(255) DEFAULT NULL, location VARCHAR(255) DEFAULT NULL, max_capacity INT DEFAULT NULL, price INT DEFAULT NULL, category VARCHAR(255) NOT NULL, PRIMARY KEY(id))
         SQL);
         $this->addSql(<<<'SQL'
             CREATE INDEX IDX_B26681EE78C696A ON evenement (organizer_id_id)
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE "user" ADD password VARCHAR(255) DEFAULT NULL
+            CREATE TABLE "user" (id SERIAL NOT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, email VARCHAR(255) DEFAULT NULL, picture VARCHAR(255) DEFAULT NULL, roles JSON NOT NULL, password VARCHAR(255) DEFAULT NULL, phone_number VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE "user" ADD phone_number INT DEFAULT NULL
+            ALTER TABLE evenement ADD CONSTRAINT FK_B26681EE78C696A FOREIGN KEY (organizer_id_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE
         SQL);
     }
 
@@ -44,19 +41,13 @@ final class Version20250601084026 extends AbstractMigration
             CREATE SCHEMA public
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE "user" DROP password
-        SQL);
-        $this->addSql(<<<'SQL'
-            ALTER TABLE "user" DROP phone_number
-        SQL);
-        $this->addSql(<<<'SQL'
             ALTER TABLE evenement DROP CONSTRAINT FK_B26681EE78C696A
         SQL);
         $this->addSql(<<<'SQL'
-            DROP INDEX IDX_B26681EE78C696A
+            DROP TABLE evenement
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE evenement DROP organizer_id_id
+            DROP TABLE "user"
         SQL);
     }
 }

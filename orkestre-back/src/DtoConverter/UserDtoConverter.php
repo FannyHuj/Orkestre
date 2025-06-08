@@ -14,7 +14,7 @@ class UserDtoConverter {
         $userDto->setLastName($user->getLastName());
         $userDto->setEmail($user->getEmail());
         $userDto->setPicture($user->getPicture());
-        $userDto->setRole($user->getRole());
+        $userDto->setRoles($user->getRoles());
         $userDto->setPhoneNumber($user->getPhoneNumber());
 
         return $userDto;
@@ -28,7 +28,6 @@ class UserDtoConverter {
         $user->setEmail($userDto->getEmail());
         $user->setPassword($userDto->getPassword()); 
         $user->setPicture($userDto->getPicture());
-        $user->setRole($userDto->getRole());
         $user->setPhoneNumber($userDto->getPhoneNumber());
 
         return $user;

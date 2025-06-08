@@ -62,7 +62,7 @@ final class UserController extends AbstractController
          if($hasPicture){
             $userDto->setPicture($newFileName);
         }
-        $userDto->setRole(UserRoleEnum::USER);
+        $userDto->setRoles(UserRoleEnum::USER);
 
         $converter = new UserDtoConverter();
         $user = $converter->convertToEntity($userDto);
@@ -75,4 +75,11 @@ final class UserController extends AbstractController
         return $this->json(['status' => 'success']);
        
 }
+
+    #[Route('/api/user/{email}')]
+    public function getMail ($email,UserRepository $userRepository):JsonResponse{
+        $user = $userRepository->findUserByEmail($email);
+        $convert=new UserDtoConverter();
+        return $this->json($convert->convertToDto($user));
+    }
 }
