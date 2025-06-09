@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Evenement } from '../../shared/models/evenement';
 
 @Component({
   selector: 'app-evenement-filters',
@@ -10,6 +11,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './evenement-filters.component.css'
 })
 export class EvenementFiltersComponent {
+
+  evenement: Evenement = {} as Evenement;
 
 
 

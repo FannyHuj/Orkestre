@@ -1,35 +1,44 @@
-<div class="container my-4">
-  <h5 class="text-center mb-4">Trouvez l’événement parfait pour vous</h5>
+<div class="container my-4 mt-6">
   <form class="row g-3 justify-content-center align-items-end">
-    
-    <!-- Lieu -->
-    <div class="col-md-3">
+
+    <!-- Location -->
+    <div class="col-md-2">
       <label for="lieu" class="form-label">Lieu</label>
       <select class="form-select" id="lieu">
         <option selected>Tous les lieux</option>
-        <!-- Autres options -->
       </select>
     </div>
 
     <!-- Date -->
-    <div class="col-md-3">
+    <div class="col-md-2">
       <label for="date" class="form-label">Date</label>
       <input type="date" class="form-control" id="date" placeholder="Choisir une date">
     </div>
 
-    <!-- Prix maximum -->
-    <div class="col-md-3">
+    <!-- Max price-->
+    <div class="col-md-2">
       <label for="prix" class="form-label">Prix maximum (€)</label>
       <input type="number" class="form-control" id="prix" placeholder="100" value="100">
     </div>
 
-    <!-- Catégorie -->
+    <!-- Category -->
     <div class="col-md-3">
       <label for="categorie" class="form-label">Catégorie</label>
       <select class="form-select" id="categorie">
-        <option selected>Tous</option>
-        <!-- Autres options -->
+        <option selected>Sélectionner une catégorie</option>
+        <option value="concert">Concert</option>
+        <option value="conference">Conférence</option>
+        <option value="sport">Sport</option>
+        <option value="culture">Culture</option>
+        <option value="culinary">Cuisine</option>
       </select>
+    </div>
+
+    <!-- Search -->
+    <div class="col-md-3 d-grid">
+      <button type="submit" class="btn btn-search text-white" >
+        <i class="bi bi-search"></i> Rechercher
+      </button>
     </div>
 
   </form>
