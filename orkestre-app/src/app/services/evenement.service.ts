@@ -14,5 +14,8 @@ export class EvenementService {
     return this.http.post<Evenement>('http://localhost:8000/api/createEvenement',evenement);
   }
 
+  getAllEvenements():Observable<Evenement[]>{
+    return this.http.get<Evenement[]>('http://localhost:8000/api/getAllEvenements');
+  }
 
 }
