@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Dto\EvenementDto;
 use App\DtoConverter\EvenementDtoConverter;
+use App\DtoConverter\EvenementMinDtoConverter;
 use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,5 +45,20 @@ class EvenementController extends AbstractController
         
 
         return $this->json(['status' => 'success', 'id' => $evenement->getId()], 201);
+    }
+
+    #[Route('/api/getAllEvenements')]
+    public function getAllEvenements (EvenementRepository $evenementRepository): JsonResponse{
+
+        $evenements= $evenementRepository->findAllEvenements();
+
+        $convert=new EvenementMinDtoConverter();
+        $dtoList = [];
+
+        foreach($evenements as $evenement){
+            array_push($dtoList, $convert->convertToDto($evenement));
+        }
+
+        return $this->json($dtoList, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
     }
 }

@@ -10,7 +10,7 @@ Class UserDto {
     public ?string $lastName = null;
     public ?string $email = null;
     public ?string $picture = null;
-    public ?UserRoleEnum $roles = null;
+    public array $roles = []; 
     public ?string $password = null;
     public ?string $phoneNumber = null;
 
