@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <div class="col" *ngFor="let evenement of evenements" >
-        <div class="card shadow-sm">
+        <div class="card shadow-sm border-0 card-hover">
           <div class="card-img-top position-relative text-white">
             <div class="position-absolute top-0 start-0 m-3">
               <span class="badge bg-light text-dark rounded-pill px-3 py-2">{{evenement.title}}</span>
@@ -40,10 +40,12 @@
                 <small class="text-muted">342/{{evenement.maxCapacity}} participants</small>
               </div>
             </div>
-            <button class="btn btn-signIn w-100 text-white">S'inscrire</button>
+            <button class="btn btn-signIn w-100 text-white" data-bs-toggle="modal" data-bs-target="#confirmed">S'inscrire</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-evenement-registration></app-evenement-registration>

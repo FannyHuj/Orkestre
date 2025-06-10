@@ -17,8 +17,8 @@
 
     <!-- Max price-->
     <div class="col-md-2">
-      <label for="prix" class="form-label">Prix maximum (€)</label>
-      <input type="number" class="form-control" id="prix" placeholder="100" value="100">
+      <label for="price" class="form-label">Prix maximum (€)</label>
+      <input type="number" class="form-control" id="price" placeholder="Prix max" (blur)="applyFilters()" [(ngModel)]="filters.priceMax" name="maxPrice">
     </div>
 
     <!-- Category -->
@@ -36,7 +36,7 @@
 
     <!-- Search -->
     <div class="col-md-3 d-grid">
-      <button type="submit" class="btn btn-search text-white" >
+      <button type="submit" (click)="applyFilters()" class="btn btn-search text-white" >
         <i class="bi bi-search"></i> Rechercher
       </button>
     </div>

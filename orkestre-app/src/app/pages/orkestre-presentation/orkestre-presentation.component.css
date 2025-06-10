@@ -1,7 +1,5 @@
 .gradient-text {
     background: linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899, #f97316);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 800;
 }
@@ -12,8 +10,6 @@
 
 h1 {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 700;
 }
@@ -23,12 +19,4 @@ h1 {
     transform: translateY(-8px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-h1 {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 700;
 }
