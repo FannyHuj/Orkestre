@@ -4,6 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { EvenementFormComponent } from './pages/evenement-form/evenement-form.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { EvenementDetailsComponent } from './pages/evenement-details/evenement-details.component';
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'SignIn',
     component: SignInComponent,
+  },
+  {
+    path: 'showEvenementDetails',
+    component: EvenementDetailsComponent,
   },
 ];

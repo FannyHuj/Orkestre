@@ -1,36 +1,28 @@
 <div class="container my-4 mt-6">
   <form class="row g-3 justify-content-center align-items-end">
 
-    <!-- Location -->
-    <div class="col-md-2">
-      <label for="lieu" class="form-label">Lieu</label>
-      <select class="form-select" id="lieu">
-        <option selected>Tous les lieux</option>
-      </select>
-    </div>
-
     <!-- Date -->
     <div class="col-md-2">
       <label for="date" class="form-label">Date</label>
-      <input type="date" class="form-control" id="date" placeholder="Choisir une date">
+      <input type="date" class="form-control" id="date" placeholder="Choisir une date" [(ngModel)]="filters.date" name="date">
     </div>
 
     <!-- Max price-->
     <div class="col-md-2">
       <label for="price" class="form-label">Prix maximum (€)</label>
-      <input type="number" class="form-control" id="price" placeholder="Prix max" (blur)="applyFilters()" [(ngModel)]="filters.priceMax" name="maxPrice">
+      <input type="number" class="form-control" id="price" placeholder="Prix max" [(ngModel)]="filters.priceMax" name="maxPrice">
     </div>
 
     <!-- Category -->
     <div class="col-md-3">
       <label for="categorie" class="form-label">Catégorie</label>
-      <select class="form-select" id="categorie">
+      <select class="form-select" [(ngModel)]="filters.category" name="category" id="category">
         <option selected>Sélectionner une catégorie</option>
-        <option value="concert">Concert</option>
-        <option value="conference">Conférence</option>
-        <option value="sport">Sport</option>
-        <option value="culture">Culture</option>
-        <option value="culinary">Cuisine</option>
+        <option value="concert">concert</option>
+        <option value="conference">conférence</option>
+        <option value="sport">sport</option>
+        <option value="culture">culture</option>
+        <option value="culinary">cuisine</option>
       </select>
     </div>
 

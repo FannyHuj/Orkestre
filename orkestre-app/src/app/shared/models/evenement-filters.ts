@@ -1,8 +1,7 @@
 import { EvenementCategoryEnum } from "./evenementCategoryEnum";
 
 export interface EvenementFilters {
-    location: string;
-    date:number;
+    date:string;
     priceMax:number;
     category:EvenementCategoryEnum
 }

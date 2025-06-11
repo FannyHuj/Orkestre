@@ -20,11 +20,11 @@ export class EvenementService {
   }
 
   getFilteredEvenements(filteredEvenement: EvenementFilters): Observable<Evenement[]> {
-    return this.http.post<Evenement[]>('http://localhost:8000/api/getFilteredEvenements',
+    return this.http.get<Evenement[]>('http://localhost:8000/api/getFilteredEvenements',
 
                                                                                     { params: 
-                                                                                      { 'location': filteredEvenement.location,
-                                                                                        'date': filteredEvenement.date,
+                                                                                      { 
+                                                                                        'date': filteredEvenement.date.toString(),
                                                                                         'priceMax': filteredEvenement.priceMax,
                                                                                         'category': filteredEvenement.category                                                                                  
                                                                                       }

@@ -1,15 +1,14 @@
-
 <app-evenement-filters></app-evenement-filters>
 
 <!--Card event-->
 <div class="album py-5">
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col" *ngFor="let evenement of evenements" >
+      <div class="col" *ngFor="let evenement of evenements">
         <div class="card shadow-sm border-0 card-hover">
           <div class="card-img-top position-relative text-white">
             <div class="position-absolute top-0 start-0 m-3">
-              <span class="badge bg-light text-dark rounded-pill px-3 py-2">{{evenement.title}}</span>
+              <span class="badge bg-light text-dark rounded-pill px-3 py-2">{{evenement.category}}</span>
             </div>
             <div class="position-absolute top-0 end-0 m-3">
               <span class="badge bg-light text-dark rounded-pill px-3 py-2 fw-bold">{{evenement.price}}€</span>
@@ -35,12 +34,23 @@
                 <i class="bi bi-geo-alt me-2 text-muted"></i>
                 <small class="text-muted">{{evenement.location}}</small>
               </div>
-              <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center mb-2">
                 <i class="bi bi-people me-2 text-muted"></i>
                 <small class="text-muted">342/{{evenement.maxCapacity}} participants</small>
               </div>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-file-person me-2 text-muted"></i>
+                <small class="text-muted">Organisé par : {{evenement.organizerId}} </small>
+              </div>
             </div>
-            <button class="btn btn-signIn w-100 text-white" data-bs-toggle="modal" data-bs-target="#confirmed">S'inscrire</button>
+
+
+            <div class="d-flex">
+              <button class="btn btn-signIn text-white me-2" data-bs-toggle="modal"data-bs-target="#confirmed">S'inscrire</button>
+              <button class="btn btn-signIn text-white" routerLink="/showEvenementDetails">Voir le détails</button>
+            </div>
+
+
           </div>
         </div>
       </div>
@@ -49,3 +59,4 @@
 </div>
 
 <app-evenement-registration></app-evenement-registration>
+

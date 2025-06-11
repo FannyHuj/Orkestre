@@ -27,6 +27,8 @@ export class EvenementFiltersComponent {
   }
 
   applyFilters(){
+    if (this.filters.date === undefined) {
+      this.filters.date = new Date().toISOString();}
     this.service.getFilteredEvenements(this.filters).subscribe((data: Evenement[]) => {
       this.evenementList = data;
     });
