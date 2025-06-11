@@ -45,9 +45,9 @@
             </div>
 
 
-            <div class="d-flex">
-              <button class="btn btn-signIn text-white me-2" data-bs-toggle="modal"data-bs-target="#confirmed">S'inscrire</button>
-              <button class="btn btn-signIn text-white" routerLink="/showEvenementDetails">Voir le détails</button>
+            <div class="d-flex gap-2 m-2">
+              <button class="btn btn-signIn text-white me-2 w-50" data-bs-toggle="modal"data-bs-target="#confirmed">S'inscrire</button>
+              <button class="btn btn-signIn text-white w-50"  [routerLink]="['/showEvenementDetails', evenement.id]">Voir le détails</button>
             </div>
 
 

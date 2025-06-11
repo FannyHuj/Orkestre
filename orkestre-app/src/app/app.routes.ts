@@ -28,7 +28,7 @@ export const routes: Routes = [
     component: SignInComponent,
   },
   {
-    path: 'showEvenementDetails',
+    path: 'showEvenementDetails/:id',
     component: EvenementDetailsComponent,
   },
 ];

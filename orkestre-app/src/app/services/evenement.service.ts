@@ -36,4 +36,8 @@ export class EvenementService {
       return this.http.put<Evenement>(`http://localhost:8000/api/evenementRegistration/${id}`,{});
     }
 
+  findEvenementById(id: number): Observable<Evenement> {
+    return this.http.get<Evenement>(`http://localhost:8000/api/findEvenementById/${id}`);
+  }
+
 }
