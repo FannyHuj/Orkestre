@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Evenement;
+use App\Entity\EvenementCategoryEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -102,7 +103,7 @@ class AppFixtures extends Fixture
         $evenement1->setLocation("Salle de Concert, Paris");
         $evenement1->setMaxCapacity(100);
         $evenement1->setPrice(20);
-        $evenement1->setCategory("concert");
+        $evenement1->setCategory(EvenementCategoryEnum::CONCERT);
         $evenement1->setOrganizerId($david);
         $manager->persist($evenement1);
 
@@ -113,7 +114,7 @@ class AppFixtures extends Fixture
         $evenement2->setLocation("Galerie d'Art, Paris");
         $evenement2->setMaxCapacity(50);
         $evenement2->setPrice(10);
-        $evenement2->setCategory("culture");
+        $evenement2->setCategory(EvenementCategoryEnum::CULTURE);
         $evenement2->setOrganizerId($julie);
         $manager->persist($evenement2);
 
@@ -124,7 +125,7 @@ class AppFixtures extends Fixture
         $evenement3->setLocation("Cuisine Collective, Paris");
         $evenement3->setMaxCapacity(20);
         $evenement3->setPrice(30);
-        $evenement3->setCategory("culinary");
+        $evenement3->setCategory(EvenementCategoryEnum::CULINARY);
         $evenement3->setOrganizerId($lucas);
         $manager->persist($evenement3);
 
@@ -135,7 +136,7 @@ class AppFixtures extends Fixture
         $evenement4->setLocation("Paris, France");
         $evenement4->setMaxCapacity(5000);
         $evenement4->setPrice(50);
-        $evenement4->setCategory("sport");
+        $evenement4->setCategory(EvenementCategoryEnum::SPORT);
         $evenement4->setOrganizerId($david);
         $manager->persist($evenement4);
 
@@ -146,10 +147,11 @@ class AppFixtures extends Fixture
         $evenement5->setLocation("Auditorium, Paris");
         $evenement5->setMaxCapacity(200);
         $evenement5->setPrice(15);
-        $evenement5->setCategory("conference");
+        $evenement5->setCategory(EvenementCategoryEnum::CONFERENCE);
         $evenement5->setOrganizerId($julie);
         $manager->persist($evenement5);
 
         $manager->flush();
     }
 }
+

@@ -39,6 +39,11 @@ class EvenementRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+     public function findEvenementById($id){
+
+        return $this->find($id);
+    }
+
     //    /**
     //     * @return Evenement[] Returns an array of Evenement objects
     //     */

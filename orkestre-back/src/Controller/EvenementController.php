@@ -81,4 +81,18 @@ class EvenementController extends AbstractController
 
         return $this->json($evenements, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
     }
+
+    #[Route('/api/findEvenementById/{id}')]
+    public function showEvenementDetails (EvenementRepository $evenementRepository,$id): JsonResponse{
+
+        $evenement = $evenementRepository->findEvenementById($id);
+
+        $converter = new EvenementDtoConverter();
+        $evenementDto = $converter->convertToDto($evenement);
+        $evenementDto->setOrganizerId($evenement->getOrganizerId($id)->getId($id));
+        
+
+        return $this->json($evenementDto, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
+
+    }
 }
