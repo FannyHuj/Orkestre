@@ -11,6 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use App\Dto\EvenementFiltersDto;
+use DateTime;
+use App\Entity\EvenementCategoryEnum;
 
 class EvenementController extends AbstractController
 {
@@ -60,5 +64,21 @@ class EvenementController extends AbstractController
         }
 
         return $this->json($dtoList, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
+    }
+
+    #[Route('/api/getFilteredEvenements', methods: ['GET'])]
+    public function getFilteredEvenements(Request $request, EvenementRepository $evenementRepository): JsonResponse
+    {
+        $evenementFiltersDto = new EvenementFiltersDto();
+        $evenementFiltersDto->setDate(new DateTime($request->get('date')));
+        $evenementFiltersDto->setPriceMax($request->get('priceMax'));
+      
+        $categoryString = $request->get('category');
+        $categoryEnum = EvenementCategoryEnum::tryFrom(strtoupper($categoryString));
+        $evenementFiltersDto->setCategory($categoryEnum);
+
+        $evenements = $evenementRepository->findFilteredEvenements($evenementFiltersDto);
+
+        return $this->json($evenements, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
     }
 }

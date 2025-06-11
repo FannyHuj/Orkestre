@@ -32,7 +32,7 @@ class Evenement
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
 
-    #[ORM\Column(type: 'string', enumType: EvenementCategoryEnum::class)]
+    #[ORM\Column(enumType: EvenementCategoryEnum::class)]
     private ?EvenementCategoryEnum $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'evenement')]
@@ -115,12 +115,12 @@ class Evenement
         return $this;
     }
 
-    public function getCategory(): ?EvenementCategoryEnum
+    public function getCategory()
     {
         return $this->category;
     }
 
-    public function setCategory(?EvenementCategoryEnum $category): static
+    public function setCategory($category): static
     {
         $this->category = $category;
 

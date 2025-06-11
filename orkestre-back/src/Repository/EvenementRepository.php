@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Dto\EvenementFiltersDto;
 
 /**
  * @extends ServiceEntityRepository<Evenement>
@@ -23,6 +24,19 @@ class EvenementRepository extends ServiceEntityRepository
 
      public function findAllEvenements(){
         return $this->findAll();
+    }
+
+    public function findFilteredEvenements(EvenementFiltersDto $filtersDto){
+        $qbf = $this->createQueryBuilder('evenement')
+        ->where ('evenement.evenementDate = :date')
+        ->orWhere('evenement.price <= :priceMax')
+        ->orWhere('evenement.category = :category')
+        ->setParameter('date', $filtersDto->getDate()) 
+        ->setParameter('priceMax', $filtersDto->getPriceMax())
+        ->setParameter('category', $filtersDto->getCategory());
+
+        $query = $qbf->getQuery();
+        return $query->execute();
     }
 
     //    /**
