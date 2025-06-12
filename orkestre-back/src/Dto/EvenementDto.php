@@ -14,7 +14,7 @@ Class EvenementDto {
     public ?int $maxCapacity = null;
     public ?int $price = null;
     public ?EvenementCategoryEnum $category = null;
-    public ?int $organizerId = null;
+    public ?UserDto $organizer = null;
 
 
     /**
@@ -179,21 +179,21 @@ Class EvenementDto {
 
 
     /**
-     * Get the value of organizerId
+     * Get the value of organizer
      */ 
-    public function getOrganizerId()
+    public function getOrganizer()
     {
-        return $this->organizerId;
+        return $this->organizer;
     }
 
     /**
-     * Set the value of organizerId
+     * Set the value of organizer
      *
      * @return  self
      */ 
-    public function setOrganizerId($organizerId)
+    public function setOrganizer($organizer)
     {
-        $this->organizerId = $organizerId;
+        $this->organizer = $organizer;
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\DtoConverter;
 
 use App\Entity\Evenement;
 use App\Dto\EvenementDto;
+use App\Dto\UserDto;
 
 class EvenementDtoConverter {
 
@@ -17,8 +18,19 @@ class EvenementDtoConverter {
         $evenementDto->setLocation($evenement->getLocation());
         $evenementDto->setMaxCapacity($evenement->getMaxCapacity());
         $evenementDto->setPrice($evenement->getPrice());
-         $evenementDto->setCategory($evenement->getCategory());
-        $evenementDto->setOrganizerId($evenement->getOrganizerId()->getId());
+        $evenementDto->setCategory($evenement->getCategory());
+
+        $user = new UserDto();
+        $user->setId($evenement->getOrganizer()->getId());
+        $user->setFirstName($evenement->getOrganizer()->getFirstName());
+        $user->setLastName($evenement->getOrganizer()->getLastName());
+        $user->setEmail($evenement->getOrganizer()->getEmail());
+        $user->setPicture($evenement->getOrganizer()->getPicture());
+        $user->setPhoneNumber($evenement->getOrganizer()->getPhoneNumber());
+        $user->setRoles($evenement->getOrganizer()->getRoles());
+        $user->setPassword($evenement->getOrganizer()->getPassword());
+
+        $evenementDto->setOrganizer($user);
 
         return $evenementDto;
     }

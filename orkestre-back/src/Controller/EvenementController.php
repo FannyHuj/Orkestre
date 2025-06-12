@@ -30,19 +30,19 @@ class EvenementController extends AbstractController
         $evenement = $converter->convertToEntity($evenementDto);
 
         // heck oraganizerId
-        $organizerId = $evenementDto->getOrganizerId();
-        if (!$organizerId) {
-            return $this->json(['status' => 'error', 'message' => 'organizerId manquant'], 400);
+        $organizer = $evenementDto->getOrganizer();
+        if (!$organizer) {
+            return $this->json(['status' => 'error', 'message' => 'organizer manquant'], 400);
         }
 
         // Get the organizer from the repository
-        $user = $userRepository->findUserById($organizerId);
+        $user = $userRepository->findUserById($organizer);
         if (!$user) {
             return $this->json(['status' => 'error', 'message' => 'Organisateur introuvable'], 404);
         }
 
         // Associate the organizer with the event
-        $evenement->setOrganizerId($user);
+        $evenement->setOrganizer($user);
 
         // Save the event
         $evenementRepository->save($evenement);
@@ -89,7 +89,6 @@ class EvenementController extends AbstractController
 
         $converter = new EvenementDtoConverter();
         $evenementDto = $converter->convertToDto($evenement);
-        $evenementDto->setOrganizerId($evenement->getOrganizerId($id)->getId($id));
         
 
         return $this->json($evenementDto, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);

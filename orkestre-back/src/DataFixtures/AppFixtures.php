@@ -104,7 +104,7 @@ class AppFixtures extends Fixture
         $evenement1->setMaxCapacity(100);
         $evenement1->setPrice(20);
         $evenement1->setCategory(EvenementCategoryEnum::CONCERT);
-        $evenement1->setOrganizerId($david);
+        $evenement1->setOrganizer($david);
         $manager->persist($evenement1);
 
         $evenement2 = new Evenement();
@@ -115,7 +115,7 @@ class AppFixtures extends Fixture
         $evenement2->setMaxCapacity(50);
         $evenement2->setPrice(10);
         $evenement2->setCategory(EvenementCategoryEnum::CULTURE);
-        $evenement2->setOrganizerId($julie);
+        $evenement2->setOrganizer($julie);
         $manager->persist($evenement2);
 
         $evenement3 = new Evenement();
@@ -126,7 +126,7 @@ class AppFixtures extends Fixture
         $evenement3->setMaxCapacity(20);
         $evenement3->setPrice(30);
         $evenement3->setCategory(EvenementCategoryEnum::CULINARY);
-        $evenement3->setOrganizerId($lucas);
+        $evenement3->setOrganizer($lucas);
         $manager->persist($evenement3);
 
         $evenement4 = new Evenement();  
@@ -137,7 +137,7 @@ class AppFixtures extends Fixture
         $evenement4->setMaxCapacity(5000);
         $evenement4->setPrice(50);
         $evenement4->setCategory(EvenementCategoryEnum::SPORT);
-        $evenement4->setOrganizerId($david);
+        $evenement4->setOrganizer($david);
         $manager->persist($evenement4);
 
         $evenement5 = new Evenement();
@@ -148,7 +148,7 @@ class AppFixtures extends Fixture
         $evenement5->setMaxCapacity(200);
         $evenement5->setPrice(15);
         $evenement5->setCategory(EvenementCategoryEnum::CONFERENCE);
-        $evenement5->setOrganizerId($julie);
+        $evenement5->setOrganizer($julie);
         $manager->persist($evenement5);
 
         $manager->flush();

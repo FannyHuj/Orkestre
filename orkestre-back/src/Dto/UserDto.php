@@ -3,6 +3,7 @@
 namespace App\Dto;
 
 use App\Entity\UserRoleEnum;
+use App\Entity\User;
 
 Class UserDto {
     public ?int $id = null;
@@ -13,6 +14,7 @@ Class UserDto {
     public array $roles = []; 
     public ?string $password = null;
     public ?string $phoneNumber = null;
+    public ?User $organizer = null;
 
     /**
      * Get the value of id
@@ -170,6 +172,26 @@ Class UserDto {
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of organizer
+     */ 
+    public function getOrganizer()
+    {
+        return $this->organizer;
+    }
+
+    /**
+     * Set the value of organizer
+     *
+     * @return  self
+     */ 
+    public function setOrganizer($organizer)
+    {
+        $this->organizer = $organizer;
 
         return $this;
     }

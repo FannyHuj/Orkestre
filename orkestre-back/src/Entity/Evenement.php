@@ -36,7 +36,7 @@ class Evenement
     private ?EvenementCategoryEnum $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'evenement')]
-    private ?User $organizerId = null;
+    private ?User $organizer = null;
 
     public function getId(): ?int
     {
@@ -127,14 +127,14 @@ class Evenement
         return $this;
     }
 
-    public function getOrganizerId(): ?User
+    public function getOrganizer(): ?User
     {
-    return $this->organizerId;
+    return $this->organizer;
     }
 
-    public function setOrganizerId(?User $organizerId): static
+    public function setOrganizer(?User $organizer): static
     {
-    $this->organizerId = $organizerId;
+    $this->organizer = $organizer;
 
     return $this;
     }
