@@ -1,4 +1,5 @@
 import { EvenementCategoryEnum } from "./evenementCategoryEnum";
+import { User } from "./user";
 
 export interface Evenement {
   id: number;
@@ -8,6 +9,6 @@ export interface Evenement {
   location: string;
   category: EvenementCategoryEnum;
   maxCapacity: number;
-  organizerId: number;
+  organizer: User;
   price:number;
 }

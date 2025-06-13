@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   signIn(user: FormData): Observable<any> {
-  return this.http.post('http://localhost:8000/api/signIn', user);
-}
-}
+    return this.http.post('http://localhost:8000/api/signIn', user);
+  }
 
+  getUserById(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8000/api/getUserById/${id}`);
+  }
+}

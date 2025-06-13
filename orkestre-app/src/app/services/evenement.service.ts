@@ -32,12 +32,17 @@ export class EvenementService {
                                                                                     );
   }
 
-  evenementRegistration(id: number, status: boolean):Observable<Evenement>{
-      return this.http.put<Evenement>(`http://localhost:8000/api/evenementRegistration/${id}`,{});
-    }
 
   findEvenementById(id: number): Observable<Evenement> {
     return this.http.get<Evenement>(`http://localhost:8000/api/findEvenementById/${id}`);
   }
 
+  evenementRegistrationByUser(id:number, userId:number):Observable<any>{
+    return this.http.post<any>(`http://localhost:8000/api/evenementRegistrationByUser/${id}/user/${userId}`,{});
+  }
+
+  cancelEvenementByOrganizer(id:number, userId:number):Observable<Evenement>{
+    return this.http.put<Evenement>(`http://localhost:8000/api/cancelEvenementByOrganizer/${id}/user/${userId}`,{});
+
+}
 }

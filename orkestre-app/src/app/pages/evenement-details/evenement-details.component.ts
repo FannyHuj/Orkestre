@@ -4,21 +4,37 @@ import { EvenementRegistrationComponent } from '../evenement-registration/evenem
 import { EvenementService } from '../../services/evenement.service';
 import { Evenement } from '../../shared/models/evenement';
 import { CommonModule } from '@angular/common';
+import { AuthenticationService } from '../../services/authentication.service';
+import { User } from '../../shared/models/user';
+import { CancelEvenementByOrganizerComponent } from '../cancel-evenement-by-organizer/cancel-evenement-by-organizer.component';
 
 @Component({
   selector: 'app-evenement-details',
-  imports: [RouterLink,EvenementRegistrationComponent,CommonModule],
+  imports: [RouterLink, EvenementRegistrationComponent, CommonModule,CancelEvenementByOrganizerComponent],
   templateUrl: './evenement-details.component.html',
-  styleUrl: './evenement-details.component.css'
+  styleUrl: './evenement-details.component.css',
 })
 export class EvenementDetailsComponent {
+  evenement: Evenement = {} as Evenement;
+  userConnected = {} as User;
+  selectedEvenement: Evenement = {} as Evenement;
 
-  evenement:Evenement = {} as Evenement;
 
-    constructor(
+  constructor(
     private route: ActivatedRoute,
-    private evenementService: EvenementService
+    private evenementService: EvenementService,
+    private authenticationService: AuthenticationService
   ) {
+
+     this.authenticationService.getUser().subscribe({
+    next: (user) => {
+      this.userConnected = user;
+    },
+    error: (err) => {
+      console.error('Erreur:', err);
+    },
+  });
+   
     const id = Number(this.route.snapshot.paramMap.get('id')); // Get the 'id' parameter from the route
     if (id) {
       this.evenementService.findEvenementById(id).subscribe((data) => {
@@ -26,6 +42,8 @@ export class EvenementDetailsComponent {
       });
     }
   }
+
+  cancelEvenementByOrganizer() {
+  this.evenementService.cancelEvenementByOrganizer(this.selectedEvenement.id, this.userConnected.id).subscribe();
 }
-
-
+}

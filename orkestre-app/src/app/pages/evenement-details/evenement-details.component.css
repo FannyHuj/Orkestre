@@ -55,9 +55,6 @@ h4 {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
     border-radius: 10px;
-    padding: 10px;
-    font-weight: 600;
-    
 }
 
 .btn-social:hover {
@@ -75,5 +72,4 @@ h4 {
     border-radius: 10px;
     padding: 10px;
 }
-
 
