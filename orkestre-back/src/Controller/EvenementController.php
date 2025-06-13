@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Dto\EvenementFiltersDto;
 use DateTime;
 use App\Entity\EvenementCategoryEnum;
+use App\Services\EvenementService;
 
 class EvenementController extends AbstractController
 {
@@ -93,5 +94,21 @@ class EvenementController extends AbstractController
 
         return $this->json($evenementDto, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
 
+    }
+
+    #[Route('/api/evenementRegistrationByUser/{id}/user/{userId}', methods:['POST'])]
+    public function evenementRegistration ($id,$userId, EvenementService $evenementService): JsonResponse
+    {
+       $evenementService->bookingEvenement($id, $userId);
+
+        return $this->json(['status' => 'success', 'message' => 'Inscription réussie'], 200);
+    }
+
+    #[Route('/api/cancelEvenementByOrganizer/{id}/user/{userId}', methods:['DELETE'])]
+    public function cancel ($id, $userId,EvenementService $evenementService):JsonResponse{
+
+        $evenementService->cancelEvenement($id,$userId);
+        
+        return $this->json(['status' => 'success']);
     }
 }

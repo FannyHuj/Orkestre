@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250612131336 extends AbstractMigration
+final class Version20250612150542 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -30,7 +30,22 @@ final class Version20250612131336 extends AbstractMigration
             CREATE TABLE "user" (id SERIAL NOT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, email VARCHAR(255) DEFAULT NULL, picture VARCHAR(255) DEFAULT NULL, roles JSON NOT NULL, password VARCHAR(255) DEFAULT NULL, phone_number VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))
         SQL);
         $this->addSql(<<<'SQL'
+            CREATE TABLE user_evenement (id SERIAL NOT NULL, participant_id INT DEFAULT NULL, evenement_id INT DEFAULT NULL, PRIMARY KEY(id))
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE INDEX IDX_BC6E5FA9D1C3019 ON user_evenement (participant_id)
+        SQL);
+        $this->addSql(<<<'SQL'
+            CREATE INDEX IDX_BC6E5FAFD02F13 ON user_evenement (evenement_id)
+        SQL);
+        $this->addSql(<<<'SQL'
             ALTER TABLE evenement ADD CONSTRAINT FK_B26681E876C4DDA FOREIGN KEY (organizer_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE
+        SQL);
+        $this->addSql(<<<'SQL'
+            ALTER TABLE user_evenement ADD CONSTRAINT FK_BC6E5FA9D1C3019 FOREIGN KEY (participant_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE
+        SQL);
+        $this->addSql(<<<'SQL'
+            ALTER TABLE user_evenement ADD CONSTRAINT FK_BC6E5FAFD02F13 FOREIGN KEY (evenement_id) REFERENCES evenement (id) NOT DEFERRABLE INITIALLY IMMEDIATE
         SQL);
     }
 
@@ -44,10 +59,19 @@ final class Version20250612131336 extends AbstractMigration
             ALTER TABLE evenement DROP CONSTRAINT FK_B26681E876C4DDA
         SQL);
         $this->addSql(<<<'SQL'
+            ALTER TABLE user_evenement DROP CONSTRAINT FK_BC6E5FA9D1C3019
+        SQL);
+        $this->addSql(<<<'SQL'
+            ALTER TABLE user_evenement DROP CONSTRAINT FK_BC6E5FAFD02F13
+        SQL);
+        $this->addSql(<<<'SQL'
             DROP TABLE evenement
         SQL);
         $this->addSql(<<<'SQL'
             DROP TABLE "user"
+        SQL);
+        $this->addSql(<<<'SQL'
+            DROP TABLE user_evenement
         SQL);
     }
 }

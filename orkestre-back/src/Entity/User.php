@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,6 +41,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?string $phoneNumber = null;
+
+    /**
+     * @var Collection<int, UserEvenement>
+     */
+    #[ORM\OneToMany(targetEntity: UserEvenement::class, mappedBy: 'participant')]
+    private Collection $userEvenements;
+
+    public function __construct()
+    {
+        $this->userEvenements = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -163,6 +176,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserEvenement>
+     */
+    public function getUserEvenements(): Collection
+    {
+        return $this->userEvenements;
+    }
+
+    public function addUserEvenement(UserEvenement $userEvenement): static
+    {
+        if (!$this->userEvenements->contains($userEvenement)) {
+            $this->userEvenements->add($userEvenement);
+            $userEvenement->setParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserEvenement(UserEvenement $userEvenement): static
+    {
+        if ($this->userEvenements->removeElement($userEvenement)) {
+            // set the owning side to null (unless already changed)
+            if ($userEvenement->getParticipant() === $this) {
+                $userEvenement->setParticipant(null);
+            }
+        }
 
         return $this;
     }

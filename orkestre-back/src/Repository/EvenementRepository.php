@@ -6,6 +6,7 @@ use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Dto\EvenementFiltersDto;
+use App\Entity\UserEvenement;
 
 /**
  * @extends ServiceEntityRepository<Evenement>
@@ -19,6 +20,11 @@ class EvenementRepository extends ServiceEntityRepository
 
     public function save(Evenement $evenement){
         $this->getEntityManager()->persist($evenement);
+        $this->getEntityManager()->flush();
+    }
+
+    public function registration(UserEvenement $ue){
+        $this->getEntityManager()->persist($ue);
         $this->getEntityManager()->flush();
     }
 
@@ -43,6 +49,17 @@ class EvenementRepository extends ServiceEntityRepository
 
         return $this->find($id);
     }
+
+    
+    public function cancelEvenementByOrganizer ($id){
+
+        $this->getEntityManager()->remove($id);
+        
+        $this->getEntityManager()->flush();
+
+       
+    }
+
 
     //    /**
     //     * @return Evenement[] Returns an array of Evenement objects
