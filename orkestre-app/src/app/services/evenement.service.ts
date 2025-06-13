@@ -42,7 +42,7 @@ export class EvenementService {
   }
 
   cancelEvenementByOrganizer(id:number, userId:number):Observable<Evenement>{
-    return this.http.put<Evenement>(`http://localhost:8000/api/cancelEvenementByOrganizer/${id}/user/${userId}`,{});
+    return this.http.delete<Evenement>(`http://localhost:8000/api/cancelEvenementByOrganizer/${id}/user/${userId}`,{});
 
 }
 }

@@ -4,8 +4,6 @@ import { EvenementRegistrationComponent } from '../evenement-registration/evenem
 import { EvenementService } from '../../services/evenement.service';
 import { Evenement } from '../../shared/models/evenement';
 import { CommonModule } from '@angular/common';
-import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../shared/models/user';
 import { CancelEvenementByOrganizerComponent } from '../cancel-evenement-by-organizer/cancel-evenement-by-organizer.component';
 
 @Component({
@@ -16,24 +14,14 @@ import { CancelEvenementByOrganizerComponent } from '../cancel-evenement-by-orga
 })
 export class EvenementDetailsComponent {
   evenement: Evenement = {} as Evenement;
-  userConnected = {} as User;
-  selectedEvenement: Evenement = {} as Evenement;
+
 
 
   constructor(
     private route: ActivatedRoute,
     private evenementService: EvenementService,
-    private authenticationService: AuthenticationService
   ) {
 
-     this.authenticationService.getUser().subscribe({
-    next: (user) => {
-      this.userConnected = user;
-    },
-    error: (err) => {
-      console.error('Erreur:', err);
-    },
-  });
    
     const id = Number(this.route.snapshot.paramMap.get('id')); // Get the 'id' parameter from the route
     if (id) {
@@ -43,7 +31,4 @@ export class EvenementDetailsComponent {
     }
   }
 
-  cancelEvenementByOrganizer() {
-  this.evenementService.cancelEvenementByOrganizer(this.selectedEvenement.id, this.userConnected.id).subscribe();
-}
 }

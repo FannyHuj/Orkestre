@@ -34,7 +34,6 @@ export class EvenementRegistrationComponent {
 
   evenementRegistrationByUser() {
 
-    console.log("Inscription à l'événement en cours..." + this.evId);
     this.authenticationService.getUser().subscribe({
       next: (user) => {
         this.user = user;
