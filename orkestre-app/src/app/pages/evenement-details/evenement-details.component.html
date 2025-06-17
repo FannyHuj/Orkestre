@@ -14,7 +14,8 @@
                         <div>
                             <button class="btn btn-social text-white me-2"aria-label="Button like"><i class="bi bi-share-fill"></i></button>
                             <button class="btn btn-social text-white me-2"aria-label="Button share"><i class="bi bi-heart-fill"></i></button>
-                            <button class="btn btn-social text-white" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancel"><i class="bi bi-trash-fill"></i></button>
+                            <button *ngIf="isOwner()" class="btn btn-social text-white me-2" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancel"><i class="bi bi-trash-fill"></i></button>
+                            <button *ngIf="!isOwner()"class="btn btn-social text-white me-2" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelRegistration"><i class="bi bi-x-circle"></i></button>
                         </div>
 
 
@@ -61,3 +62,4 @@
 
 <app-evenement-registration [evId]="evenement.id"></app-evenement-registration>
 <app-cancel-evenement-by-organizer [evId]="evenement.id"></app-cancel-evenement-by-organizer>
+<app-cancel-registration-by-participants [evenement]="evenement"></app-cancel-registration-by-participants>

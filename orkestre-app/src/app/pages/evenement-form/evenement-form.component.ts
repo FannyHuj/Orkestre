@@ -20,7 +20,7 @@ export class EvenementFormComponent {
     this.authService.getUser().subscribe({
       next: (user) => {
         console.log(user.id)
-        this.evenement.organizer = user.id;
+        this.evenement.organizer =user;
       },
       error: (error) => {
         console.error("Erreur lors du chargement de l'utilisateur", error);

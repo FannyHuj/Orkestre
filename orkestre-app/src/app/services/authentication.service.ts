@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { User } from '../shared/models/user';
 import { Login } from '../shared/models/login';
 import { Auth } from '../shared/models/auth';
+import { UserRoleEnum } from '../shared/models/userRoleEnum';
 
 @Injectable({
   providedIn: 'root',
