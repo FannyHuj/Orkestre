@@ -16,43 +16,44 @@ use App\Dto\EvenementFiltersDto;
 use DateTime;
 use App\Entity\EvenementCategoryEnum;
 use App\Services\EvenementService;
+use App\Repository\UserEvenementRepository;
 
 class EvenementController extends AbstractController
 {
-    #[Route('/api/createEvenement', methods: ['POST'])]
-    public function new(
-        #[MapRequestPayload] EvenementDto $evenementDto,
-        EvenementRepository $evenementRepository,
-        UserRepository $userRepository,
-    ): JsonResponse {
-        $converter = new EvenementDtoConverter();
+  #[Route('/api/createEvenement', methods: ['POST'])]
+public function new(
+    #[MapRequestPayload] EvenementDto $evenementDto,
+    EvenementRepository $evenementRepository,
+    UserRepository $userRepository,
+): JsonResponse {
+    $converter = new EvenementDtoConverter();
 
-        // Convert DTO to Entity
-        $evenement = $converter->convertToEntity($evenementDto);
+    // Convert DTO to Entity
+    $evenement = $converter->convertToEntity($evenementDto);
 
-        // heck oraganizerId
-        $organizer = $evenementDto->getOrganizer();
-        if (!$organizer) {
-            return $this->json(['status' => 'error', 'message' => 'organizer manquant'], 400);
-        }
-
-        // Get the organizer from the repository
-        $user = $userRepository->findUserById($organizer);
-        if (!$user) {
-            return $this->json(['status' => 'error', 'message' => 'Organisateur introuvable'], 404);
-        }
-
-        // Associate the organizer with the event
-        $evenement->setOrganizer($user);
-
-        // Save the event
-        $evenementRepository->save($evenement);
-        
-
-        return $this->json(['status' => 'success', 'id' => $evenement->getId()], 201);
+    // Get organizer (UserDto)
+    $organizerDto = $evenementDto->getOrganizer();
+    if (!$organizerDto || !$organizerDto->getId()) {
+        return $this->json(['status' => 'error', 'message' => 'Organizer manquant ou invalide'], 400);
     }
 
-    #[Route('/api/getAllEvenements')]
+    // Get user entity from the ID
+    $organizer = $userRepository->find($organizerDto->getId());
+    if (!$organizer) {
+        return $this->json(['status' => 'error', 'message' => 'Utilisateur non trouvé'], 404);
+    }
+
+    // Associate the organizer to the evenement 
+    $evenement->setOrganizer($organizer);
+
+    // Save the evenement 
+    $evenementRepository->save($evenement, true);
+
+    return $this->json(['status' => 'success']);
+}
+
+
+       #[Route('/api/getAllEvenements')]
     public function getAllEvenements (EvenementRepository $evenementRepository): JsonResponse{
 
         $evenements= $evenementRepository->findAllEvenements();
@@ -108,6 +109,14 @@ class EvenementController extends AbstractController
     public function cancel ($id, $userId,EvenementService $evenementService):JsonResponse{
 
         $evenementService->cancelEvenement($id,$userId);
+        
+        return $this->json(['status' => 'success']);
+    }
+
+    #[Route('/api/cancelRegistrationByUser/evenement/{id}/user/{userId}', methods:['DELETE'])]
+    public function cancelRegistration ($id, $userId,EvenementService $evenementService):JsonResponse{
+
+        $evenementService->cancelRegistration($id, $userId);
         
         return $this->json(['status' => 'success']);
     }

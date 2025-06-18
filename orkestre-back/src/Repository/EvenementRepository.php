@@ -6,6 +6,7 @@ use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Dto\EvenementFiltersDto;
+use App\Entity\User;
 use App\Entity\UserEvenement;
 
 /**
@@ -58,6 +59,13 @@ class EvenementRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
 
        
+    }
+
+    public function cancelRegistration (UserEvenement $ue){
+
+        $this->getEntityManager()->remove($ue);
+        
+        $this->getEntityManager()->flush();
     }
 
 

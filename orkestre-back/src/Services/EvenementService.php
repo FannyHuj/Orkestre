@@ -4,17 +4,20 @@ namespace App\Services;
 use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
 use App\Entity\UserEvenement;
+use App\Repository\UserEvenementRepository;
 
 class EvenementService {
 
     private EvenementRepository $evenementRepository;
     private UserRepository $userRepository;
+    private UserEvenementRepository $userEvenementRepository;
 
     
-    public function __construct(UserRepository $userRepository, EvenementRepository $evenementRepository)
+    public function __construct(UserRepository $userRepository, EvenementRepository $evenementRepository, UserEvenementRepository $userEvenementRepository)
     {
         $this->evenementRepository = $evenementRepository;
         $this->userRepository = $userRepository;
+        $this->userEvenementRepository = $userEvenementRepository;
     }
 
     public function bookingEvenement($evenementId, $userId)
@@ -39,4 +42,12 @@ class EvenementService {
 
         $this->evenementRepository->cancelEvenementByOrganizer($evenement, $user);
     }
+
+    public function cancelRegistration ($evenementId, $userId){
+
+        $userEvenement = $this->userEvenementRepository->findUserEvenement(($evenementId), ($userId));
+        $this->userEvenementRepository->cancel($userEvenement);     
+    }
+
+     
 }

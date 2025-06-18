@@ -16,6 +16,39 @@ class UserEvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, UserEvenement::class);
     }
 
+
+    public function findParticipationById($id){
+
+        return $this->find($id);
+    }
+
+    public function findEvenementById($id){
+
+        return $this->find($id);
+    }
+
+    public function findUserEvenement ($evenementId, $userId){
+        $qb =$this->createQueryBuilder('ue')
+            ->where('ue.evenement = :evenementId')
+            ->andWhere('ue.participant = :userId')
+            ->setParameter('evenementId', $evenementId)
+            ->setParameter('userId', $userId);
+
+            $query = $qb->getQuery();
+            return $query->getOneOrNullResult(); 
+
+    }
+
+    public function cancel (UserEvenement $userEvenement)
+    {
+        $this->getEntityManager()->remove($userEvenement);
+        $this->getEntityManager()->flush();
+    }
+
+  
+
+    
+
     //    /**
     //     * @return UserEvenement[] Returns an array of UserEvenement objects
     //     */
