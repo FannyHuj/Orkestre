@@ -10,6 +10,7 @@ import { EvenementService } from '../../services/evenement.service';
   selector: 'app-evenement-filters',
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './evenement-filters.component.html',
+  standalone: true,
   styleUrl: './evenement-filters.component.css'
 })
 export class EvenementFiltersComponent {
@@ -18,18 +19,24 @@ export class EvenementFiltersComponent {
   evenementList: Evenement[] = [];
   filters:EvenementFilters = {} as EvenementFilters;
 
-  @Output() evenementsFound = new EventEmitter<Evenement[]>();
+  //@Output() evenementsFound = new EventEmitter<Evenement[]>();
 
   constructor (private service: EvenementService) {
-    this.service.getAllEvenements().subscribe((evenements: Evenement[]) => {
-      this.evenementList = evenements;
-    });
+    this.applyDefaultFilters();
   }
 
   applyFilters(){
     if (this.filters.date === undefined) {
       this.filters.date = new Date().toISOString();}
-    this.service.getFilteredEvenements(this.filters).subscribe((data: Evenement[]) => {
+      this.service.getFilteredEvenements(this.filters).subscribe((data: Evenement[]) => {
+      this.evenementList = data;
+    });
+  }
+
+  applyDefaultFilters(){
+    if (this.filters.date === undefined) {
+      this.filters.date = new Date().toISOString();}
+    this.service.getAllEvenements().subscribe((data: Evenement[]) => {
       this.evenementList = data;
     });
   }

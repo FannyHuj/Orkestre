@@ -10,6 +10,7 @@ import { User } from '../../shared/models/user';
   imports: [CommonModule],
   templateUrl: './evenement-registration.component.html',
   styleUrl: './evenement-registration.component.css',
+  standalone: true
 })
 export class EvenementRegistrationComponent {
   successMessage: string | null = null;

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { EvenementRegistrationComponent } from '../evenement-registration/evenement-registration.component';
+import { EvenementRegistrationComponent } from '../../features/evenement-registration/evenement-registration.component';
 import { EvenementService } from '../../services/evenement.service';
 import { Evenement } from '../../shared/models/evenement';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,7 @@ import { User } from '../../shared/models/user';
 export class EvenementDetailsComponent {
   evenement: Evenement = {} as Evenement;
   userConnected = {} as User;
-  
+
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +27,7 @@ export class EvenementDetailsComponent {
     private authenticationService: AuthenticationService
   ) {
 
-    
+
         this.authenticationService.getUser().subscribe({
        next: (user) => {
          this.userConnected = user;
@@ -36,7 +36,7 @@ export class EvenementDetailsComponent {
          console.error('Erreur:', err);
        },
      });
-   
+
     const id = Number(this.route.snapshot.paramMap.get('id')); // Get the 'id' parameter from the route
     if (id) {
       this.evenementService.findEvenementById(id).subscribe((data) => {
@@ -46,7 +46,7 @@ export class EvenementDetailsComponent {
   }
 
     isOwner(): boolean {
-    return this.userConnected.id == this.evenement.organizer.id; 
+    return this.userConnected.id == this.evenement.organizer.id;
   }
 
 }

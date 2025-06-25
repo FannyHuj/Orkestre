@@ -1,10 +1,10 @@
-<app-evenement-filters></app-evenement-filters>
+<app-evenement-filters #filterEvenements></app-evenement-filters>
 
 <!--Card event-->
 <div class="album py-5">
   <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col" *ngFor="let evenement of evenements">
+      <div class="col" *ngFor="let evenement of filterEvenements.evenementList">
         <div class="card shadow-sm border-0 card-hover">
           <div class="card-img-top position-relative text-white">
             <div class="position-absolute top-0 start-0 m-3">
