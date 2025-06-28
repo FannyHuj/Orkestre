@@ -18,6 +18,7 @@ export class EvenementFiltersComponent {
   evenement: Evenement = {} as Evenement;
   evenementList: Evenement[] = [];
   filters:EvenementFilters = {} as EvenementFilters;
+  
 
   //@Output() evenementsFound = new EventEmitter<Evenement[]>();
 
