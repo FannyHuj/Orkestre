@@ -3,18 +3,19 @@
 namespace App\Dto;
 
 use App\Entity\EvenementCategoryEnum;
+use \DateTime;
 
 Class EvenementFiltersDto {
 
     private ?string $location = null;
-    private ?\DateTimeInterface $date = null;
+    private ?DateTime $date = null;
     private ?int $priceMax = null;
-    private ?EvenementCategoryEnum $category = null;
+    private ?string $category = null;
 
     
     public function __construct()
     {
-        $this->date = new \DateTime();
+        $this->date = new DateTime();
     }
 
 

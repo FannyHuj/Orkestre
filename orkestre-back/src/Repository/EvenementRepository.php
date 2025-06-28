@@ -34,10 +34,11 @@ class EvenementRepository extends ServiceEntityRepository
     }
 
     public function findFilteredEvenements(EvenementFiltersDto $filtersDto){
+       
         $qbf = $this->createQueryBuilder('evenement')
-        ->where ('evenement.evenementDate = :date')
-        ->orWhere('evenement.price <= :priceMax')
-        ->orWhere('evenement.category = :category')
+        ->where ('evenement.evenementDate >= :date')
+        ->andWhere('evenement.price <= :priceMax')
+        ->andWhere('evenement.category = :category')
         ->setParameter('date', $filtersDto->getDate()) 
         ->setParameter('priceMax', $filtersDto->getPriceMax())
         ->setParameter('category', $filtersDto->getCategory());

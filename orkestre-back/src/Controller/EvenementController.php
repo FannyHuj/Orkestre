@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Dto\EvenementDto;
 use App\DtoConverter\EvenementDtoConverter;
 use App\DtoConverter\EvenementMinDtoConverter;
+use App\DtoConverter\EvenementFiltersDtoConverter;
 use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,7 +54,7 @@ public function new(
 }
 
 
-       #[Route('/api/getAllEvenements')]
+    #[Route('/api/getAllEvenements')]
     public function getAllEvenements (EvenementRepository $evenementRepository): JsonResponse{
 
         $evenements= $evenementRepository->findAllEvenements();
@@ -72,16 +73,27 @@ public function new(
     public function getFilteredEvenements(Request $request, EvenementRepository $evenementRepository): JsonResponse
     {
         $evenementFiltersDto = new EvenementFiltersDto();
-        $evenementFiltersDto->setDate(new DateTime($request->get('date')));
+        $dateFromrequest=$request->get('date');
+        $date=new DateTime($dateFromrequest);
+        $dateFormat=$date->format('Y-m-d H:i:s');
+        $evenementFiltersDto->setDate(new DateTime($dateFormat));
         $evenementFiltersDto->setPriceMax($request->get('priceMax'));
       
-        $categoryString = $request->get('category');
-        $categoryEnum = EvenementCategoryEnum::tryFrom(strtoupper($categoryString));
-        $evenementFiltersDto->setCategory($categoryEnum);
+        //$categoryString = $request->get('category');
+        //$categoryEnum = EvenementCategoryEnum::tryFrom(strtoupper($categoryString));
+        
+        $evenementFiltersDto->setCategory($request->get('category'));
 
         $evenements = $evenementRepository->findFilteredEvenements($evenementFiltersDto);
 
-        return $this->json($evenements, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
+         $convert=new EvenementMinDtoConverter();
+         $dtoList = [];
+
+        foreach($evenements as $evenement){
+            array_push($dtoList, $convert->convertToDto($evenement));
+        }
+
+        return $this->json($dtoList, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
     }
 
     #[Route('/api/findEvenementById/{id}')]
