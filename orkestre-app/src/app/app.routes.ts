@@ -5,6 +5,8 @@ import { EvenementFormComponent } from './pages/evenement-form/evenement-form.co
 import { LoginComponent } from './pages/login/login.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { EvenementDetailsComponent } from './pages/evenement-details/evenement-details.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { PersonalEvenementComponent } from './pages/personal-evenement/personal-evenement.component';
 
 export const routes: Routes = [
   {
@@ -30,5 +32,13 @@ export const routes: Routes = [
   {
     path: 'showEvenementDetails/:id',
     component: EvenementDetailsComponent,
+  },
+  {
+    path: 'profilePage',
+    component: ProfilePageComponent,
+  },
+  {
+    path: 'personalEvenement',
+    component: PersonalEvenementComponent,
   },
 ];
