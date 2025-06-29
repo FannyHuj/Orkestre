@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Dto\UserDto;
 use App\DtoConverter\UserDtoConverter;
+use App\DtoConverter\UserProfileInfoDtoConverter;
 use App\Repository\UserRepository;
 use App\Entity\UserRoleEnum;
 use Psr\Log\LoggerInterface;
@@ -81,5 +82,13 @@ class UserController extends AbstractController
         $user = $userRepository->findUserByEmail($email);
         $convert=new UserDtoConverter();
         return $this->json($convert->convertToDto($user));
+    }
+
+    #[Route('/api/getProfileInfo/{id}', methods: ['GET'])]
+    public function getProfileInfo ($id, UserRepository $userRepository):JsonResponse{
+        $user = $userRepository->findUserById($id);
+        $convert=new UserProfileInfoDtoConverter();
+        return $this->json($convert->convertToDto($user), 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
+      
     }
 }
