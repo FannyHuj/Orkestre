@@ -13,6 +13,7 @@ import { UserRoleEnum } from '../../shared/models/userRoleEnum';
   styleUrl: './sign-in.component.css',
 })
 export class SignInComponent {
+  
   user: User = {} as User;
   role: UserRoleEnum[] = [] as UserRoleEnum[];
   avatar: File = {} as File;

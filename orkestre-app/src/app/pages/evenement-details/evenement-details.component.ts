@@ -23,7 +23,6 @@ export class EvenementDetailsComponent {
   constructor(
     private route: ActivatedRoute,
     private evenementService: EvenementService,
-    private authService: AuthenticationService,
     private authenticationService: AuthenticationService
   ) {
 
