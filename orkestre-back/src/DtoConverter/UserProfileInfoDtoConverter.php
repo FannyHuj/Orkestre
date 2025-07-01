@@ -14,6 +14,7 @@ class UserProfileInfoDtoConverter {
         $userDto->setLastName($user->getLastName());
         $userDto->setEmail($user->getEmail());
         $userDto->setPhoneNumber($user->getPhoneNumber());
+        $userDto->setPicture($user->getPicture());
        
 
         return $userDto;
@@ -26,6 +27,7 @@ class UserProfileInfoDtoConverter {
         $user->setLastName($userDto->getLastName());
         $user->setEmail($userDto->getEmail());
         $user->setPhoneNumber($userDto->getPhoneNumber());
+        $user->setPicture($userDto->getPicture());
 
         return $user;
     }

@@ -34,9 +34,10 @@ class UserController extends AbstractController
             if (!in_array($picture->getMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
                 return $this->json(['error' => 'Invalid image type'], 400);
             }
-            if ($picture->getSize() > 8000000) { // 8 Mo
-                return $this->json(['error' => 'Image size exceeds limit'], 400);
-            }
+            //
+            //if ($picture->getSize() > 8000000) { // 8 Mo
+             //   return $this->json(['error' => 'Image size exceeds limit'], 400);
+            //}
 
             // Rename the file to avoid conflicts
             $newFileName = uniqid() . '.' . $picture->guessExtension();
@@ -63,7 +64,7 @@ class UserController extends AbstractController
          if($hasPicture){
             $userDto->setPicture($newFileName);
         }
-        $userDto->setRoles(UserRoleEnum::USER);
+        $userDto->setRoles([UserRoleEnum::USER]);
 
         $converter = new UserDtoConverter();
         $user = $converter->convertToEntity($userDto);

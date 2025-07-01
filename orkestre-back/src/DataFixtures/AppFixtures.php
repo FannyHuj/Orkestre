@@ -79,7 +79,7 @@ class AppFixtures extends Fixture
         $lucas->setLastName("Nguyen");
         $lucas->setEmail("lucas@orkestre.com");
         $lucas->setPassword($this->userPasswordHasher->hashPassword($lucas, 'password'));
-        $lucas->setPicture("../public/assets/images/lucas.jpg");
+        $lucas->setPicture("assets/images/lucas.jpg");
         $lucas->setPhoneNumber("0987654321");
         $lucas->setRoles(['ROLE_ORGANIZER']);
         $manager->persist($lucas);

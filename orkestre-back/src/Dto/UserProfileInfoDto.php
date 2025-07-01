@@ -8,6 +8,7 @@ Class UserProfileInfoDto {
     public ?string $lastName = null;
     public ?string $email = null;
     public ?string $phoneNumber = null;
+    public ?string $picture = null;
 
 
     /**
@@ -106,6 +107,26 @@ Class UserProfileInfoDto {
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of picture
+     */ 
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set the value of picture
+     *
+     * @return  self
+     */ 
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
 
         return $this;
     }

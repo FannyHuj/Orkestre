@@ -31,6 +31,12 @@ class UserDtoConverter {
         $user->setPassword($userDto->getPassword()); 
         $user->setPicture($userDto->getPicture());
         $user->setPhoneNumber($userDto->getPhoneNumber());
+        
+        $userRole=$userDto->getRoles();
+        $roles = $user->getRoles();
+        $roles[] = reset($userRole);
+        $user->setRoles($roles);
+
 
         return $user;
     }
