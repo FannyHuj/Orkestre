@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
         $alice->setLastName("Dupont");
         $alice->setEmail("alice@orkestre.com");
         $alice->setPassword($this->userPasswordHasher->hashPassword($alice, 'password'));
-        $alice->setPicture("../public/assets/images/alice.jpg");
+        $alice->setPicture("alice.jpg");
         $alice->setPhoneNumber("0123456789");
         $alice->setRoles(['ROLE_USER']);
         $manager->persist($alice);
@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
         $bob->setLastName("Martin");
         $bob->setEmail("bob@orkestre.com");
         $bob->setPassword($this->userPasswordHasher->hashPassword($bob, 'password'));
-        $bob->setPicture("../public/assets/images/bob.jpg");
+        $bob->setPicture("bob.jpg");
         $bob->setPhoneNumber("0987654321");
         $bob->setRoles(['ROLE_USER']);
         $manager->persist($bob);
@@ -47,7 +47,7 @@ class AppFixtures extends Fixture
         $charlie->setLastName("Durand");
         $charlie->setEmail("charlie@orkestre.com");
         $charlie->setPassword($this->userPasswordHasher->hashPassword($charlie, 'password'));
-        $charlie->setPicture("../public/assets/images/charlie.jpg");
+        $charlie->setPicture("charlie.jpg");
         $charlie->setPhoneNumber("0123456789");
         $charlie->setRoles(['ROLE_USER']);
         $manager->persist($charlie);
@@ -59,7 +59,7 @@ class AppFixtures extends Fixture
         $david->setLastName("Lefevre");
         $david->setEmail("david@orkestre.com");
         $david->setPassword($this->userPasswordHasher->hashPassword($david, 'password'));
-        $david->setPicture("../public/assets/images/david.jpg");
+        $david->setPicture("david.jpg");
         $david->setPhoneNumber("0987654321");
         $david->setRoles(['ROLE_ORGANIZER']);
         $manager->persist($david);
@@ -69,7 +69,7 @@ class AppFixtures extends Fixture
         $julie->setLastName("Bernard");
         $julie->setEmail("julie@orkestre.com");
         $julie->setPassword($this->userPasswordHasher->hashPassword($julie, 'password'));
-        $julie->setPicture("../public/assets/images/julie.jpg");
+        $julie->setPicture("julie.jpg");
         $julie->setPhoneNumber("0123456789");
         $julie->setRoles(['ROLE_ORGANIZER']);
         $manager->persist($julie);
@@ -79,7 +79,7 @@ class AppFixtures extends Fixture
         $lucas->setLastName("Nguyen");
         $lucas->setEmail("lucas@orkestre.com");
         $lucas->setPassword($this->userPasswordHasher->hashPassword($lucas, 'password'));
-        $lucas->setPicture("assets/images/lucas.jpg");
+        $lucas->setPicture("lucas.jpg");
         $lucas->setPhoneNumber("0987654321");
         $lucas->setRoles(['ROLE_ORGANIZER']);
         $manager->persist($lucas);
@@ -90,7 +90,7 @@ class AppFixtures extends Fixture
         $emma->setLastName("Lemoine");
         $emma->setEmail("emma@orkestre.com");
         $emma->setPassword($this->userPasswordHasher->hashPassword($emma, 'password'));
-        $emma->setPicture("../public/assets/images/emma.jpg");
+        $emma->setPicture("emma.jpg");
         $emma->setPhoneNumber("0123456789");
         $emma->setRoles(['ROLE_ADMIN']);
         $manager->persist($emma);

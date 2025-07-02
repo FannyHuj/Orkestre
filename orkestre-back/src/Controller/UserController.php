@@ -10,6 +10,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Dto\UserDto;
 use App\DtoConverter\UserDtoConverter;
 use App\DtoConverter\UserProfileInfoDtoConverter;
+use App\Dto\UserProfileInfoDto;
 use App\Repository\UserRepository;
 use App\Entity\UserRoleEnum;
 use Psr\Log\LoggerInterface;
@@ -91,5 +92,20 @@ class UserController extends AbstractController
         $convert=new UserProfileInfoDtoConverter();
         return $this->json($convert->convertToDto($user), 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
       
+    }
+
+     #[Route('/api/updateProfileInfo/{id}', methods: ['POST'])]
+    public function updateProfileInfos(Request $request,$id,UserRepository $userRepository,UserProfileInfoDtoConverter $converter): JsonResponse {
+
+        $user = $userRepository->findUserById($id);
+        
+        $user->setFirstName($request->request->get('firstName'));
+        $user->setLastName($request->request->get('lastName'));
+        $user->setEmail($request->request->get('email'));
+        $user->setPhoneNumber($request->request->get('phoneNumber'));
+      
+        $userRepository->save($user);
+
+        return $this->json($converter->convertToDto($user),200,[], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
     }
 }
