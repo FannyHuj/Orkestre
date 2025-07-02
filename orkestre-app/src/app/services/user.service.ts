@@ -20,4 +20,12 @@ export class UserService {
   getProfileInfo(id:number): Observable<User> {
     return this.http.get<User>(`http://localhost:8000/api/getProfileInfo/${id}`); 
   }
+
+  updateProfileInfos(id: number, formData: FormData): Observable<User> {
+  return this.http.post<User>(
+    `http://localhost:8000/api/updateProfileInfo/${id}`, 
+    formData
+  );
+}
+
 }

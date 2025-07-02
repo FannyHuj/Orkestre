@@ -7,38 +7,46 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-page',
-  imports: [RouterLink,FormsModule],
+  imports: [RouterLink, FormsModule],
   templateUrl: './profile-page.component.html',
-  styleUrl: './profile-page.component.css'
+  styleUrl: './profile-page.component.css',
 })
 export class ProfilePageComponent {
-
   user: User = {} as User;
   userConnected = {} as User;
-  pictureURL= 'http://localhost:8000/';
+  pictureURL = 'http://localhost:8000/';
 
-  
   constructor(
     private userService: UserService,
     private authenticationService: AuthenticationService
   ) {
+    this.authenticationService.getUser().subscribe({
+      next: (user) => {
+        this.userConnected = user;
+      },
+      error: (err) => {
+        console.error('Erreur:', err);
+      },
+    });  
+}
 
+updateProfileInfos(){
+  const formData = new FormData();
 
-        this.authenticationService.getUser().subscribe({
-       next: (user) => {
-         this.userConnected = user;
-       },
-       error: (err) => {
-         console.error('Erreur:', err);
-       },
-       
-     });
+  formData.append("firstName", this.userConnected.firstName);
+  formData.append("lastName", this.userConnected.lastName);
+  formData.append("email", this.userConnected.email);
+  formData.append("phoneNumber", this.userConnected.phoneNumber);
+  formData.append("picture", this.userConnected.picture);
 
-       this.userService.getProfileInfo(this.userConnected.id).subscribe(() => {
-      
-      });
-   
-    
-  }
+  this.userService.updateProfileInfos(this.userConnected.id,formData).subscribe({
+    next: (response) => {
+      console.log('User updated successfully', response);
+    },
+    error: (error) => {
+      console.error('Error updating user', error);
+    },
+  });
+}
 
 }
