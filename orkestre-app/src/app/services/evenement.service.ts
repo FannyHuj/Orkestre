@@ -50,4 +50,8 @@ export class EvenementService {
     return this.http.delete<Evenement>(`http://localhost:8000/api/cancelRegistrationByUser/evenement/${id}/user/${userId}`,{});
 
 }
+
+  findEvenementByUserId(userId: number): Observable<Evenement[]> {
+  return this.http.get<Evenement[]>(`http://localhost:8000/api/findEvenementByUserId/${userId}`);
+}
 }

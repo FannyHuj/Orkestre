@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Evenement } from '../../shared/models/evenement';
 import { EvenementFilters } from '../../shared/models/evenement-filters';
 import { EvenementService } from '../../services/evenement.service';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-evenement-filters',
@@ -18,6 +19,7 @@ export class EvenementFiltersComponent {
   evenement: Evenement = {} as Evenement;
   evenementList: Evenement[] = [];
   filters:EvenementFilters = {} as EvenementFilters;
+
   
 
   //@Output() evenementsFound = new EventEmitter<Evenement[]>();
@@ -40,6 +42,10 @@ export class EvenementFiltersComponent {
     this.service.getAllEvenements().subscribe((data: Evenement[]) => {
       this.evenementList = data;
     });
+   
+    
+    
+
   }
 
 

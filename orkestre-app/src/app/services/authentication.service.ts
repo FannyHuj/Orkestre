@@ -19,6 +19,7 @@ export class AuthenticationService {
 
   setToken(token: string) {
     this.cookieService.set('jwtToken', token);
+    this.isUserLogged = true; // User is logged
   }
 
   getToken(): string {
