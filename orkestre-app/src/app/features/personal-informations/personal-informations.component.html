@@ -6,13 +6,26 @@
       <div class="container">
         <div class="row justify-content-center my-4">
           <div class="form-container p-4">
+                <!-- Success alert -->
+                  <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    {{ successMessage }}
+                    <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert()"></button>
+                  </div>
+
+                  <!-- Error alert -->
+                  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    {{ successMessage }}
+                    <button type="button" class="btn-close" aria-label="Close" (click)="closeErrorAlert()"></button>
+                  </div>
+            
             <div class="d-flex align-items-center justify-content-between flex-wrap">
               <div class="d-flex align-items-center">
                 <div class="profile-avatar me-3">
                   <div class="position-relative d-inline-block me-3">
+                    
                     <!-- Avatar -->
                     <img [src]="pictureURL + '/assets/images/' + userConnected.picture" alt="Avatar"
-                      class="avatar-small rounded-circle"/>
+                      class="avatar-small rounded-circle" />
 
 
                     <!-- Pencil icon -->
@@ -24,7 +37,6 @@
                     <!-- Hidden file input -->
                     <input type="file" id="fileInput" class="d-none" (change)="onFileSelected($event)">
                   </div>
-
 
                 </div>
                 <div>
@@ -94,4 +106,3 @@
 
     </div>
   </div>
-

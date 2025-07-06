@@ -10,13 +10,22 @@ import { AuthenticationService } from '../../services/authentication.service';
   styleUrl: './nav-bar.component.css',
 })
 export class NavBarComponent {
+  isConnected: boolean= false;
+
   constructor(
     private authService: AuthenticationService,
     private router: Router
-  ) {}
+  ) {
+
+    
+  }
+  
 
   isUserConnected(): boolean {
+    this.isConnected = this.authService.isUserConnected();
+    
     return this.authService.isUserConnected();
+
   }
 
   logout() {

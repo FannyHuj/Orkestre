@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { User } from '../shared/models/user';
 import { Login } from '../shared/models/login';
 import { Auth } from '../shared/models/auth';
-import { UserRoleEnum } from '../shared/models/userRoleEnum';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +14,16 @@ export class AuthenticationService {
   token: string | null = null;
   private isUserLogged: boolean = false;
 
-  constructor(private cookieService: CookieService, private http: HttpClient) {}
+  constructor(private cookieService: CookieService, private http: HttpClient) {
+       const token = this.cookieService.get('jwtToken');
+    if (token) {
+      this.isUserLogged = true;
+    }
+  }
 
   setToken(token: string) {
     this.cookieService.set('jwtToken', token);
-    this.isUserLogged = true; // User is logged
+
   }
 
   getToken(): string {
