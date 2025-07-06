@@ -16,6 +16,7 @@ Class EvenementDto {
     public ?EvenementCategoryEnum $category = null;
     public ?UserDto $organizer = null;
     public ?int $countParticipants = null;
+    public ?int $remainingCapacity = null;
 
 
     /**
@@ -215,6 +216,26 @@ Class EvenementDto {
     public function setCountParticipants($countParticipants)
     {
         $this->countParticipants = $countParticipants;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of remainingCapacity
+     */ 
+    public function getRemainingCapacity()
+    {
+        return $this->remainingCapacity;
+    }
+
+    /**
+     * Set the value of remainingCapacity
+     *
+     * @return  self
+     */ 
+    public function setRemainingCapacity($remainingCapacity)
+    {
+        $this->remainingCapacity = $remainingCapacity;
 
         return $this;
     }

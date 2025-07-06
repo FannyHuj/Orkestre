@@ -105,6 +105,7 @@ class AppFixtures extends Fixture
         $evenement1->setPrice(20);
         $evenement1->setCategory(EvenementCategoryEnum::CONCERT);
         $evenement1->setOrganizer($david);
+        $evenement1->addParticipant($alice);
         $manager->persist($evenement1);
 
         $evenement2 = new Evenement();
@@ -116,6 +117,8 @@ class AppFixtures extends Fixture
         $evenement2->setPrice(10);
         $evenement2->setCategory(EvenementCategoryEnum::CULTURE);
         $evenement2->setOrganizer($julie);
+        $evenement2->addParticipant($bob);
+        $evenement2->addParticipant($lucas);
         $manager->persist($evenement2);
 
         $evenement3 = new Evenement();
@@ -127,6 +130,7 @@ class AppFixtures extends Fixture
         $evenement3->setPrice(30);
         $evenement3->setCategory(EvenementCategoryEnum::CULINARY);
         $evenement3->setOrganizer($lucas);
+        $evenement3->addParticipant($bob);
         $manager->persist($evenement3);
 
         $evenement4 = new Evenement();  

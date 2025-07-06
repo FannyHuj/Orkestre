@@ -19,6 +19,7 @@ use DateTime;
 use App\Entity\EvenementCategoryEnum;
 use App\Services\EvenementService;
 use App\Repository\UserEvenementRepository;
+use Psr\Log\LoggerInterface;
 
 class EvenementController extends AbstractController
 {
@@ -71,19 +72,36 @@ public function new(
     }
 
     #[Route('/api/getFilteredEvenements', methods: ['GET'])]
-    public function getFilteredEvenements(Request $request, EvenementRepository $evenementRepository): JsonResponse
+    public function getFilteredEvenements(LoggerInterface $logger, Request $request, EvenementRepository $evenementRepository): JsonResponse
     {
         $evenementFiltersDto = new EvenementFiltersDto();
-        $dateFromrequest=$request->get('date');
-        $date=new DateTime($dateFromrequest);
-        $dateFormat=$date->format('Y-m-d H:i:s');
-        $evenementFiltersDto->setDate(new DateTime($dateFormat));
-        $evenementFiltersDto->setPriceMax($request->get('priceMax'));
+
+         if($request->get("date") === "undefined" || $request->get("date") === "null"  || $request->get("date") === ""){
+        
+            $evenementFiltersDto->setDate(null);
+        }else{
+           $dateFromrequest=$request->get('date');
+            $date=new DateTime($dateFromrequest);
+            $dateFormat=$date->format('Y-m-d H:i:s');
+            $evenementFiltersDto->setDate(new DateTime($dateFormat));
+        }
+        
+        if($request->get("priceMax") === "undefined" || $request->get("priceMax") === "null"  || $request->get("priceMax") === ""){
+        
+            $evenementFiltersDto->setPriceMax(0);
+        }else{
+            $evenementFiltersDto->setPriceMax($request->get('priceMax'));
+        }
       
         //$categoryString = $request->get('category');
         //$categoryEnum = EvenementCategoryEnum::tryFrom(strtoupper($categoryString));
         
-        $evenementFiltersDto->setCategory($request->get('category'));
+        $logger->debug('Category from request: ' . $request->get('category'));
+        if($request->get('category') === 'undefined'){
+            $evenementFiltersDto->setCategory(null);
+        }else{  
+            $evenementFiltersDto->setCategory($request->get('category'));
+        }
 
         $evenements = $evenementRepository->findFilteredEvenements($evenementFiltersDto);
 
@@ -134,26 +152,6 @@ public function new(
         return $this->json(['status' => 'success']);
     }
 
-    #[Route('/api/findEvenementByUserId/{userId}', methods: ['GET'])]
-    public function findEvenementByUserId($userId, UserEvenementRepository $userEvenementRepository): JsonResponse
-    {
-        $userEvenements = $userEvenementRepository->findBy(['participant' => $userId]);
-
-        if (!$userEvenements) {
-            return $this->json(['status' => 'error', 'message' => 'Aucun événement trouvé pour cet utilisateur'], 404);
-        }
-
-        $convert = new EvenementDtoConverter();
-        $dtoList = [];
-
-        foreach ($userEvenements as $userEvenement) {
-            $evenement = $userEvenement->getEvenement();
-            if ($evenement) {
-                array_push($dtoList, $convert->convertToDto($evenement));
-            }
-        }
-
-        return $this->json($dtoList, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
-    }
+    
 
 }

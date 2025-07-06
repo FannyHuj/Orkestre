@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\UserEvenement;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -37,6 +40,20 @@ class Evenement
 
     #[ORM\ManyToOne(inversedBy: 'evenement')]
     private ?User $organizer = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'evenements')]
+    private Collection $participants;
+
+
+
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -138,5 +155,31 @@ class Evenement
 
     return $this;
     }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(User $participant): static
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants->add($participant);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(User $participant): static
+    {
+        $this->participants->removeElement($participant);
+
+        return $this;
+    }
+
+
 
 }

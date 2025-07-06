@@ -14,6 +14,8 @@ use App\Dto\UserProfileInfoDto;
 use App\Repository\UserRepository;
 use App\Entity\UserRoleEnum;
 use Psr\Log\LoggerInterface;
+use App\DtoConverter\EvenementDtoConverter;
+use App\DtoConverter\EvenementMinDtoConverter;
 
 class UserController extends AbstractController
 {
@@ -117,4 +119,29 @@ class UserController extends AbstractController
 
         return $this->json($converter->convertToDto($user),200,[], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
     }
+
+     #[Route('/api/findEvenementByUserId/{userId}', methods: ['GET'])]
+    public function findEvenementByUserId($userId, UserRepository $userRepository): JsonResponse
+    {
+        $user = $userRepository->findUserById($userId);
+
+        if (!$user) {
+            return $this->json(['status' => 'error', 'message' => 'Aucun événement trouvé pour cet utilisateur'], 404);
+        }
+
+        $evenements= $user->getEvenements();
+
+        $convert = new EvenementMinDtoConverter();
+        $dtoList = [];
+
+        foreach ($evenements as $evenement) {
+            if ($evenement) {
+                array_push($dtoList, $convert->convertToDto($evenement));
+            }
+        }
+
+        return $this->json($dtoList, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
+    }
+
+     
 }

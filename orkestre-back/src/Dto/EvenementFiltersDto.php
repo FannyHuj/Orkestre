@@ -11,11 +11,12 @@ Class EvenementFiltersDto {
     private ?DateTime $date = null;
     private ?int $priceMax = null;
     private ?string $category = null;
+    
 
     
     public function __construct()
     {
-        $this->date = new DateTime();
+      
     }
 
 

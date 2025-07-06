@@ -10,14 +10,12 @@ class EvenementService {
 
     private EvenementRepository $evenementRepository;
     private UserRepository $userRepository;
-    private UserEvenementRepository $userEvenementRepository;
 
     
-    public function __construct(UserRepository $userRepository, EvenementRepository $evenementRepository, UserEvenementRepository $userEvenementRepository)
+    public function __construct(UserRepository $userRepository, EvenementRepository $evenementRepository)
     {
         $this->evenementRepository = $evenementRepository;
         $this->userRepository = $userRepository;
-        $this->userEvenementRepository = $userEvenementRepository;
     }
 
     public function bookingEvenement($evenementId, $userId)
@@ -25,12 +23,8 @@ class EvenementService {
         $evenement= $this->evenementRepository->findEvenementById($evenementId);
         $user=$this->userRepository->findUserById($userId);
 
-        //Associate User to the Evenement
-        $ue= new UserEvenement();
-        $ue->setEvenement($evenement);      
-        $ue->setParticipant($user);
-
-        $this->evenementRepository->registration($ue);
+       $evenement->addParticipant($user);
+       $this->evenementRepository->save($evenement);
     
 
     }
@@ -44,9 +38,10 @@ class EvenementService {
     }
 
     public function cancelRegistration ($evenementId, $userId){
-
-        $userEvenement = $this->userEvenementRepository->findUserEvenement(($evenementId), ($userId));
-        $this->userEvenementRepository->cancel($userEvenement);     
+     $evenement = $this->evenementRepository->findEvenementById($evenementId);
+     $user = $this->userRepository->findUserById($userId);
+     $evenement->removeParticipant($user);
+     $this->evenementRepository->save($evenement);   
     }
 
      

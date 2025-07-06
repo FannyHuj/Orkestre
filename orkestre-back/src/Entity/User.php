@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Entity\UserEvenement;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -43,14 +44,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $phoneNumber = null;
 
     /**
-     * @var Collection<int, UserEvenement>
+     * @var Collection<int, Evenement>
      */
-    #[ORM\OneToMany(targetEntity: UserEvenement::class, mappedBy: 'participant')]
-    private Collection $userEvenements;
+    #[ORM\ManyToMany(targetEntity: Evenement::class, mappedBy: 'participants')]
+    private Collection $evenements;
+
+ 
 
     public function __construct()
     {
-        $this->userEvenements = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
     }
 
 
@@ -181,44 +184,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, UserEvenement>
+     * @return Collection<int, Evenement>
      */
-    public function getUserEvenements(): Collection
+    public function getEvenements(): Collection
     {
-        return $this->userEvenements;
+        return $this->evenements;
     }
 
-    public function addUserEvenement(UserEvenement $userEvenement): static
+    public function addEvenement(Evenement $evenement): static
     {
-        if (!$this->userEvenements->contains($userEvenement)) {
-            $this->userEvenements->add($userEvenement);
-            $userEvenement->setParticipant($this);
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements->add($evenement);
+            $evenement->addParticipant($this);
         }
 
         return $this;
     }
 
-    public function removeUserEvenement(UserEvenement $userEvenement): static
+    public function removeEvenement(Evenement $evenement): static
     {
-        if ($this->userEvenements->removeElement($userEvenement)) {
-            // set the owning side to null (unless already changed)
-            if ($userEvenement->getParticipant() === $this) {
-                $userEvenement->setParticipant(null);
-            }
+        if ($this->evenements->removeElement($evenement)) {
+            $evenement->removeParticipant($this);
         }
 
         return $this;
     }
 
-    /**
-     * Set the value of userEvenements
-     *
-     * @return  self
-     */ 
-    public function setUserEvenements($userEvenements)
-    {
-        $this->userEvenements = $userEvenements;
-
-        return $this;
-    }
+ 
 }

@@ -19,6 +19,7 @@ class EvenementMinDtoConverter {
         $evenementDto->setMaxCapacity($evenement->getMaxCapacity());
         $evenementDto->setPrice($evenement->getPrice());
         $evenementDto->setCategory($evenement->getCategory());
+        $evenementDto->setCountParticipants($evenement->getParticipants()->count());
 
         $user = new UserDto();
         $user->setId($evenement->getOrganizer()->getId());

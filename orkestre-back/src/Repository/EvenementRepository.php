@@ -24,24 +24,38 @@ class EvenementRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function registration(UserEvenement $ue){
-        $this->getEntityManager()->persist($ue);
-        $this->getEntityManager()->flush();
-    }
-
      public function findAllEvenements(){
         return $this->findAll();
     }
 
     public function findFilteredEvenements(EvenementFiltersDto $filtersDto){
        
-        $qbf = $this->createQueryBuilder('evenement')
-        ->where ('evenement.evenementDate >= :date')
-        ->andWhere('evenement.price <= :priceMax')
-        ->andWhere('evenement.category = :category')
-        ->setParameter('date', $filtersDto->getDate()) 
-        ->setParameter('priceMax', $filtersDto->getPriceMax())
-        ->setParameter('category', $filtersDto->getCategory());
+        $qbf = $this->createQueryBuilder('evenement');
+
+         if($filtersDto->getDate() !== null) {
+            
+            $qbf ->where ('evenement.evenementDate >= :date');
+            $qbf->setParameter('date', $filtersDto->getDate()) ;
+        }
+        
+
+    if($filtersDto->getPriceMax() !==0)
+     {
+         $qbf->andWhere('evenement.price <= :priceMax');
+          $qbf->setParameter('priceMax', $filtersDto->getPriceMax());
+    } 
+   
+
+    if($filtersDto->getCategory() !== null) {
+        $qbf->andWhere('evenement.category = :category');
+    }
+
+   
+    
+        
+    if($filtersDto->getCategory() !== null) {
+        $qbf->setParameter('category', $filtersDto->getCategory());
+    }
 
         $query = $qbf->getQuery();
         return $query->execute();
@@ -51,6 +65,8 @@ class EvenementRepository extends ServiceEntityRepository
 
         return $this->find($id);
     }
+
+
 
     
     public function cancelEvenementByOrganizer ($id){
@@ -62,12 +78,6 @@ class EvenementRepository extends ServiceEntityRepository
        
     }
 
-    public function cancelRegistration (UserEvenement $ue){
-
-        $this->getEntityManager()->remove($ue);
-        
-        $this->getEntityManager()->flush();
-    }
 
 
     //    /**
