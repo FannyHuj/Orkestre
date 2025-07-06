@@ -29,17 +29,17 @@ export class EvenementFiltersComponent {
   }
 
   applyFilters(){
-    if (this.filters.date === undefined) {
-      this.filters.date = new Date().toISOString();}
+      if (this.filters.date === undefined) {
+       this.filters.date = "null";
+      }
       this.service.getFilteredEvenements(this.filters).subscribe((data: Evenement[]) => {
       this.evenementList = data;
     });
   }
 
   applyDefaultFilters(){
-    if (this.filters.date === undefined) {
-      this.filters.date = new Date().toISOString();}
-    this.service.getAllEvenements().subscribe((data: Evenement[]) => {
+    
+      this.service.getAllEvenements().subscribe((data: Evenement[]) => {
       this.evenementList = data;
     });
    

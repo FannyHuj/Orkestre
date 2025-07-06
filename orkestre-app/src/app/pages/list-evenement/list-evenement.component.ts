@@ -17,6 +17,13 @@ import { EvenementRegistrationComponent } from '../../features/evenement-registr
 })
 export class ListEvenementComponent {
 
+  selectedEvenement: Evenement = {} as Evenement;
+
+   setSelectedEvenement(evenement: Evenement) {
+    this.selectedEvenement = evenement;
+  }
+
+
   //evenements:Evenement[] = [];
 
   //@Output() filteredEvenements = new EventEmitter<Evenement[]>();

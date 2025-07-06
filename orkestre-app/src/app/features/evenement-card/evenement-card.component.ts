@@ -16,6 +16,7 @@ export class EvenementCardComponent {
 
   evenement: Evenement = {} as Evenement;
   evenementList: Evenement[] = [];
+ 
 
   constructor(private service: EvenementService,private authenticationService: AuthenticationService, private UserService:UserService) {
     this.authenticationService.getUser().subscribe((user: any) => {

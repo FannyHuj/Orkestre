@@ -11,4 +11,6 @@ export interface Evenement {
   maxCapacity: number;
   organizer: User;
   price:number;
+  countParticipants: number;
+  remainingCapacity: number;
 }

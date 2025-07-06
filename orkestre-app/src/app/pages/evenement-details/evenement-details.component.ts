@@ -8,16 +8,18 @@ import { CancelEvenementByOrganizerComponent } from '../cancel-evenement-by-orga
 import { CancelRegistrationByParticipantsComponent } from '../cancel-registration-by-participants/cancel-registration-by-participants.component';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../shared/models/user';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-evenement-details',
-  imports: [RouterLink,CommonModule, EvenementRegistrationComponent, CommonModule,CancelEvenementByOrganizerComponent,CancelRegistrationByParticipantsComponent],
+  imports: [RouterLink,CommonModule, EvenementRegistrationComponent, CommonModule,CancelEvenementByOrganizerComponent,CancelRegistrationByParticipantsComponent,QRCodeComponent],
   templateUrl: './evenement-details.component.html',
   styleUrl: './evenement-details.component.css',
 })
 export class EvenementDetailsComponent {
   evenement: Evenement = {} as Evenement;
   userConnected = {} as User;
+  shareableUrl: string = "";
 
 
   constructor(
@@ -25,6 +27,7 @@ export class EvenementDetailsComponent {
     private evenementService: EvenementService,
     private authenticationService: AuthenticationService
   ) {
+    this.shareableUrl = window.location.href; // Get the current URL to share
 
 
         this.authenticationService.getUser().subscribe({
