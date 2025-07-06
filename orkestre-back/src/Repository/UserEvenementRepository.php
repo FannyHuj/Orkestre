@@ -45,7 +45,6 @@ class UserEvenementRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-  
 
     
 

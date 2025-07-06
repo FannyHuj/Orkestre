@@ -103,6 +103,15 @@ class UserController extends AbstractController
         $user->setLastName($request->request->get('lastName'));
         $user->setEmail($request->request->get('email'));
         $user->setPhoneNumber($request->request->get('phoneNumber'));
+        $user->setPicture($request->request->get('picture'));
+        $picture = $request->files->get('picture');
+         if (!in_array($picture->getMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
+                return $this->json(['error' => 'Invalid image type'], 400);
+            }
+        $newFileName = uniqid() . '.' . $picture->guessExtension();
+        $destination = $this->getParameter('kernel.project_dir') . '/public/assets/images';
+        $picture->move($destination,$newFileName);
+        $user->setPicture($newFileName);
       
         $userRepository->save($user);
 

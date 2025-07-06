@@ -15,6 +15,7 @@ Class EvenementDto {
     public ?int $price = null;
     public ?EvenementCategoryEnum $category = null;
     public ?UserDto $organizer = null;
+    public ?int $countParticipants = null;
 
 
     /**
@@ -194,6 +195,26 @@ Class EvenementDto {
     public function setOrganizer($organizer)
     {
         $this->organizer = $organizer;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of countParticipants
+     */ 
+    public function getCountParticipants()
+    {
+        return $this->countParticipants;
+    }
+
+    /**
+     * Set the value of countParticipants
+     *
+     * @return  self
+     */ 
+    public function setCountParticipants($countParticipants)
+    {
+        $this->countParticipants = $countParticipants;
 
         return $this;
     }

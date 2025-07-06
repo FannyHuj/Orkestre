@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Dto\EvenementFiltersDto;
+use App\DtoConverter\UserProfileInfoDtoConverter;
 use DateTime;
 use App\Entity\EvenementCategoryEnum;
 use App\Services\EvenementService;
@@ -132,4 +133,27 @@ public function new(
         
         return $this->json(['status' => 'success']);
     }
+
+    #[Route('/api/findEvenementByUserId/{userId}', methods: ['GET'])]
+    public function findEvenementByUserId($userId, UserEvenementRepository $userEvenementRepository): JsonResponse
+    {
+        $userEvenements = $userEvenementRepository->findBy(['participant' => $userId]);
+
+        if (!$userEvenements) {
+            return $this->json(['status' => 'error', 'message' => 'Aucun événement trouvé pour cet utilisateur'], 404);
+        }
+
+        $convert = new EvenementDtoConverter();
+        $dtoList = [];
+
+        foreach ($userEvenements as $userEvenement) {
+            $evenement = $userEvenement->getEvenement();
+            if ($evenement) {
+                array_push($dtoList, $convert->convertToDto($evenement));
+            }
+        }
+
+        return $this->json($dtoList, 200, [], ['json_encode_options' => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES]);
+    }
+
 }

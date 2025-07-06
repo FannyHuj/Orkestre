@@ -14,6 +14,7 @@ Class EvenementMinDto {
     public ?int $maxCapacity = null;
     public ?int $price = null;
     public ?EvenementCategoryEnum $category = null;
+    public ?UserDto $organizer = null;
 
 
     /**
@@ -172,6 +173,28 @@ Class EvenementMinDto {
     public function setCategory($category)
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+ 
+
+    /**
+     * Get the value of organizer
+     */ 
+    public function getOrganizer()
+    {
+        return $this->organizer;
+    }
+
+    /**
+     * Set the value of organizer
+     *
+     * @return  self
+     */ 
+    public function setOrganizer($organizer)
+    {
+        $this->organizer = $organizer;
 
         return $this;
     }

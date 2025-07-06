@@ -11,6 +11,7 @@ Class UserProfileInfoDto {
     public ?string $picture = null;
 
 
+
     /**
      * Get the value of id
      */ 
@@ -130,4 +131,5 @@ Class UserProfileInfoDto {
 
         return $this;
     }
+
 }

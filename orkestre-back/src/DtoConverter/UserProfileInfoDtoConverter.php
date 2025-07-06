@@ -3,6 +3,8 @@ namespace App\DtoConverter;
 
 use App\Entity\User;
 use App\Dto\UserProfileInfoDto;
+use App\Dto\UserEvenementDto;
+
 
 class UserProfileInfoDtoConverter {
 
@@ -27,7 +29,7 @@ class UserProfileInfoDtoConverter {
         $user->setLastName($userDto->getLastName());
         $user->setEmail($userDto->getEmail());
         $user->setPhoneNumber($userDto->getPhoneNumber());
-        $user->setPicture($userDto->getPicture());
+        $user->setPicture($userDto->getPicture());      
 
         return $user;
     }

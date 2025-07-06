@@ -37,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $password = null;
+    private ?string $password = null; 
 
     #[ORM\Column(nullable: true)]
     private ?string $phoneNumber = null;
@@ -206,6 +206,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $userEvenement->setParticipant(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Set the value of userEvenements
+     *
+     * @return  self
+     */ 
+    public function setUserEvenements($userEvenements)
+    {
+        $this->userEvenements = $userEvenements;
 
         return $this;
     }
