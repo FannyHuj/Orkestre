@@ -3,14 +3,14 @@
 namespace App\Dto;
 
 Class UserDto {
-    public ?int $id = null;
-    public ?string $firstName = null;
-    public ?string $lastName = null;
-    public ?string $email = null;
-    public ?string $picture = null;
-    public array $roles = []; 
-    public ?string $password = null;
-    public ?string $phoneNumber = null;
+    private ?int $id = null;
+    private ?string $firstName = null;
+    private ?string $lastName = null;
+    private ?string $email = null;
+    private ?string $picture = null;
+    private array $roles = []; 
+    private ?string $password = null;
+    private ?string $phoneNumber = null;
 
 
     /**

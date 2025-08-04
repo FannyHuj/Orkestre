@@ -6,17 +6,17 @@ use App\Entity\EvenementCategoryEnum;
 
 Class EvenementDto {
 
-    public ?int $id = null;
-    public ?string $title = null;
-    public ?string $description = null;
-    public ?\DateTimeInterface $evenementDate = null;
-    public ?string $location = null;
-    public ?int $maxCapacity = null;
-    public ?int $price = null;
-    public ?EvenementCategoryEnum $category = null;
-    public ?UserDto $organizer = null;
-    public ?int $countParticipants = null;
-    public ?int $remainingCapacity = null;
+    private ?int $id = null;
+    private ?string $title = null;
+    private ?string $description = null;
+    private ?\DateTimeInterface $evenementDate = null;
+    private ?string $location = null;
+    private ?int $maxCapacity = null;
+    private ?int $price = null;
+    private ?EvenementCategoryEnum $category = null;
+    private ?UserDto $organizer = null;
+    private ?int $countParticipants = null;
+    private ?int $remainingCapacity = null;
 
 
     /**
@@ -239,4 +239,5 @@ Class EvenementDto {
 
         return $this;
     }
+
 }
