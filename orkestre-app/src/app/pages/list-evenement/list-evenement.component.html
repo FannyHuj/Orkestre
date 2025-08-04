@@ -57,10 +57,13 @@
 
             <!-- Buttons -->
             <div class="d-flex gap-2 mt-auto">
-              <button class="btn btn-signIn text-white w-50" (click)="setSelectedEvenement(evenement)" data-bs-toggle="modal" data-bs-target="#confirmed">
+              <button *ngIf="evenement.isCompleted === false" class="btn btn-signIn text-white w-50" (click)="setSelectedEvenement(evenement)" data-bs-toggle="modal" data-bs-target="#confirmed">
                 S'inscrire
               </button>
-              <button class="btn btn-signIn text-white w-50" [routerLink]="['/showEvenementDetails', evenement.id]">
+               <button *ngIf="evenement.isCompleted === true" class="btn btn-signIn text-white w-50" disabled>
+               Complet
+              </button>
+              <button *ngIf="evenement.isCompleted === false" class="btn btn-signIn text-white w-50" [routerLink]="['/showEvenementDetails', evenement.id]">
                 Voir le détails
               </button>
             </div>
