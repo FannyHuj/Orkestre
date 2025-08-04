@@ -7,7 +7,7 @@ import localeFr from '@angular/common/locales/fr'; registerLocaleData(localeFr, 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavBarComponent, FooterComponent,],
+  imports: [RouterOutlet, NavBarComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

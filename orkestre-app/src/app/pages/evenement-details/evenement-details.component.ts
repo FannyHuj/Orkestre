@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EvenementRegistrationComponent } from '../../features/evenement-registration/evenement-registration.component';
 import { EvenementService } from '../../services/evenement.service';
@@ -20,6 +20,7 @@ export class EvenementDetailsComponent {
   evenement: Evenement = {} as Evenement;
   userConnected = {} as User;
   shareableUrl: string = "";
+
 
 
   constructor(
@@ -50,5 +51,7 @@ export class EvenementDetailsComponent {
     isOwner(): boolean {
     return this.userConnected.id == this.evenement.organizer.id;
   }
+
+  
 
 }

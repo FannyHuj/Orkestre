@@ -13,4 +13,5 @@ export interface Evenement {
   price:number;
   countParticipants: number;
   remainingCapacity: number;
+  isCompleted: boolean;
 }
