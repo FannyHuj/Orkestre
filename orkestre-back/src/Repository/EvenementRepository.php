@@ -25,7 +25,11 @@ class EvenementRepository extends ServiceEntityRepository
     }
 
      public function findAllEvenements(){
-        return $this->findAll();
+        $qbf = $this->createQueryBuilder('evenement');
+        $qbf->where ('evenement.evenementDate >= :date');
+        $qbf->setParameter('date', new \DateTime());
+        $query = $qbf->getQuery();
+        return $query->execute();
     }
 
     public function findFilteredEvenements(EvenementFiltersDto $filtersDto){

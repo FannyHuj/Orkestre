@@ -6,7 +6,10 @@ use App\Entity\Evenement;
 use App\Dto\EvenementDto;
 use App\Dto\UserDto;
 
+
 class EvenementDtoConverter {
+
+   
 
      public function convertToDto(Evenement $evenement): EvenementDto
     {
@@ -33,6 +36,7 @@ class EvenementDtoConverter {
         $user->setPassword($evenement->getOrganizer()->getPassword());
 
         $evenementDto->setOrganizer($user);
+
 
         return $evenementDto;
     }

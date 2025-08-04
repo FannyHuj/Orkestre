@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Dto\EvenementDto;
 use App\DtoConverter\EvenementDtoConverter;
 use App\DtoConverter\EvenementMinDtoConverter;
-use App\DtoConverter\EvenementFiltersDtoConverter;
 use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,11 +13,8 @@ use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Dto\EvenementFiltersDto;
-use App\DtoConverter\UserProfileInfoDtoConverter;
 use DateTime;
-use App\Entity\EvenementCategoryEnum;
 use App\Services\EvenementService;
-use App\Repository\UserEvenementRepository;
 use Psr\Log\LoggerInterface;
 
 class EvenementController extends AbstractController
@@ -57,11 +53,11 @@ public function new(
 
 
     #[Route('/api/getAllEvenements')]
-    public function getAllEvenements (EvenementRepository $evenementRepository): JsonResponse{
+    public function getAllEvenements (EvenementRepository $evenementRepository, EvenementService $evenementService): JsonResponse{
 
         $evenements= $evenementRepository->findAllEvenements();
 
-        $convert=new EvenementMinDtoConverter();
+        $convert=new EvenementMinDtoConverter($evenementService);
         $dtoList = [];
 
         foreach($evenements as $evenement){
@@ -72,7 +68,7 @@ public function new(
     }
 
     #[Route('/api/getFilteredEvenements', methods: ['GET'])]
-    public function getFilteredEvenements(LoggerInterface $logger, Request $request, EvenementRepository $evenementRepository): JsonResponse
+    public function getFilteredEvenements(LoggerInterface $logger, Request $request, EvenementRepository $evenementRepository, EvenementService $evenementService): JsonResponse
     {
         $evenementFiltersDto = new EvenementFiltersDto();
 
@@ -105,7 +101,7 @@ public function new(
 
         $evenements = $evenementRepository->findFilteredEvenements($evenementFiltersDto);
 
-         $convert=new EvenementMinDtoConverter();
+         $convert=new EvenementMinDtoConverter($evenementService);
          $dtoList = [];
 
         foreach($evenements as $evenement){
@@ -116,7 +112,7 @@ public function new(
     }
 
     #[Route('/api/findEvenementById/{id}')]
-    public function showEvenementDetails (EvenementRepository $evenementRepository,$id): JsonResponse{
+    public function showEvenementDetails (EvenementRepository $evenementRepository,$id, EvenementService $evenementService): JsonResponse{
 
         $evenement = $evenementRepository->findEvenementById($id);
 

@@ -84,17 +84,6 @@ class AppFixtures extends Fixture
         $lucas->setRoles(['ROLE_ORGANIZER']);
         $manager->persist($lucas);
 
-        // Creation of administrator
-        $emma = new User();
-        $emma->setFirstName("Emma");
-        $emma->setLastName("Lemoine");
-        $emma->setEmail("emma@orkestre.com");
-        $emma->setPassword($this->userPasswordHasher->hashPassword($emma, 'password'));
-        $emma->setPicture("emma.jpg");
-        $emma->setPhoneNumber("0123456789");
-        $emma->setRoles(['ROLE_ADMIN']);
-        $manager->persist($emma);
-
         // Creation of evenements
         $evenement1 = new Evenement();
         $evenement1->setTitle("Concert de Jazz");

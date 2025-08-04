@@ -6,16 +6,17 @@ use App\Entity\EvenementCategoryEnum;
 
 Class EvenementMinDto {
 
-    public ?int $id = null;
-    public ?string $title = null;
-    public ?string $description = null;
-    public ?\DateTimeInterface $evenementDate = null;
-    public ?string $location = null;
-    public ?int $maxCapacity = null;
-    public ?int $price = null;
-    public ?EvenementCategoryEnum $category = null;
-    public ?UserDto $organizer = null;
-    public ?int $countParticipants = null;
+    private ?int $id = null;
+    private ?string $title = null;
+    private ?string $description = null;
+    private ?\DateTimeInterface $evenementDate = null;
+    private ?string $location = null;
+    private ?int $maxCapacity = null;
+    private ?int $price = null;
+    private ?EvenementCategoryEnum $category = null;
+    private ?UserDto $organizer = null;
+    private ?int $countParticipants = null;
+    private ?bool $isCompleted = false;
 
 
     /**
@@ -219,4 +220,24 @@ Class EvenementMinDto {
 
         return $this;
     }
+
+      /**
+       * Get the value of isCompleted
+       */ 
+      public function getIsCompleted()
+      {
+            return $this->isCompleted;
+      }
+
+      /**
+       * Set the value of isCompleted
+       *
+       * @return  self
+       */ 
+      public function setIsCompleted($isCompleted)
+      {
+            $this->isCompleted = $isCompleted;
+
+            return $this;
+      }
 }

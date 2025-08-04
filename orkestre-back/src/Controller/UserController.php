@@ -10,14 +10,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Dto\UserDto;
 use App\DtoConverter\UserDtoConverter;
 use App\DtoConverter\UserProfileInfoDtoConverter;
-use App\Dto\UserProfileInfoDto;
 use App\Repository\UserRepository;
 use App\Entity\UserRoleEnum;
 use Psr\Log\LoggerInterface;
-use App\DtoConverter\EvenementDtoConverter;
 use App\DtoConverter\EvenementMinDtoConverter;
+use App\Services\EvenementService;
 
 class UserController extends AbstractController
+
 {
     #[Route('/api/signIn', methods:['POST'])]
     public function signIn(Request $request, LoggerInterface $logger, UserRepository $userRepository,UserPasswordHasherInterface $passwordHasher): JsonResponse
@@ -121,7 +121,7 @@ class UserController extends AbstractController
     }
 
      #[Route('/api/findEvenementByUserId/{userId}', methods: ['GET'])]
-    public function findEvenementByUserId($userId, UserRepository $userRepository): JsonResponse
+    public function findEvenementByUserId($userId, UserRepository $userRepository, EvenementService $evenementService): JsonResponse
     {
         $user = $userRepository->findUserById($userId);
 
@@ -131,7 +131,7 @@ class UserController extends AbstractController
 
         $evenements= $user->getEvenements();
 
-        $convert = new EvenementMinDtoConverter();
+        $convert = new EvenementMinDtoConverter($evenementService);
         $dtoList = [];
 
         foreach ($evenements as $evenement) {

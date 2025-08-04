@@ -3,12 +3,12 @@
 namespace App\Dto;
 
 Class UserProfileInfoDto {
-    public ?int $id = null;
-    public ?string $firstName = null;
-    public ?string $lastName = null;
-    public ?string $email = null;
-    public ?string $phoneNumber = null;
-    public ?string $picture = null;
+    private ?int $id = null;
+    private ?string $firstName = null;
+    private ?string $lastName = null;
+    private ?string $email = null;
+    private ?string $phoneNumber = null;
+    private ?string $picture = null;
 
 
 

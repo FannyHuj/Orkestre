@@ -3,8 +3,6 @@ namespace App\Services;
 
 use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
-use App\Entity\UserEvenement;
-use App\Repository\UserEvenementRepository;
 
 class EvenementService {
 
@@ -20,8 +18,10 @@ class EvenementService {
 
     public function bookingEvenement($evenementId, $userId)
     {
-        $evenement= $this->evenementRepository->findEvenementById($evenementId);
-        $user=$this->userRepository->findUserById($userId);
+       $evenement= $this->evenementRepository->findEvenementById($evenementId);
+       $user=$this->userRepository->findUserById($userId);
+
+        if ($this->isCompleted($evenement)){}
 
        $evenement->addParticipant($user);
        $this->evenementRepository->save($evenement);
@@ -39,9 +39,18 @@ class EvenementService {
 
     public function cancelRegistration ($evenementId, $userId){
      $evenement = $this->evenementRepository->findEvenementById($evenementId);
-     $user = $this->userRepository->findUserById($userId);
+     $user = $this->userRepository->findUserById($userId); 
      $evenement->removeParticipant($user);
      $this->evenementRepository->save($evenement);   
+    }
+
+    public function isCompleted($evenement){
+       if (count($evenement->getParticipants()) == $evenement->getMaxCapacity()){
+        return true;     
+       } 
+       else {
+        return false;
+       }
     }
 
      

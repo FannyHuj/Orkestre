@@ -5,8 +5,16 @@ namespace App\DtoConverter;
 use App\Entity\Evenement;
 use App\Dto\EvenementMinDto;
 use App\Dto\UserDto;
+use App\Services\EvenementService;
 
 class EvenementMinDtoConverter {
+
+     var EvenementService $evenementService;
+
+    public function __construct($evenementService){
+        $this->evenementService = $evenementService;
+
+    }
 
          public function convertToDto(Evenement $evenement): EvenementMinDto
     {
@@ -32,6 +40,8 @@ class EvenementMinDtoConverter {
         $user->setPassword($evenement->getOrganizer()->getPassword());
 
         $evenementDto->setOrganizer($user);
+
+        $evenementDto->setIsCompleted($this->evenementService->isCompleted($evenement));
         
 
         return $evenementDto;
